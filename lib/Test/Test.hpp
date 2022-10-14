@@ -4,7 +4,7 @@
 
 
 /**
- * @brief Test class. Hi.
+ * @brief Test class. Hi. Again.
 */
 #ifndef TEST_HPP
 #define TEST_HPP
