@@ -1,3 +1,8 @@
+/**
+ * @file main.c
+ * @brief Contains app_main.
+*/
+
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -5,6 +10,9 @@
 
 #define LED 2
 
+/**
+ * @brief The main function. Currenlty blinker example.
+*/
 void app_main(void) {
     gpio_reset_pin(LED);
     gpio_set_direction(LED, GPIO_MODE_OUTPUT);
