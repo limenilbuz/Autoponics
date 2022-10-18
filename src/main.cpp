@@ -7,19 +7,26 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
+#include "phmetric.hpp"
+#include "mockph.hpp"
 
-#define LED 2
+#define LED GPIO_NUM_2
 
 /**
  * @brief The main function. Currenlty blinker example.
 */
-void app_main(void) {
+extern "C" void app_main(void) {
     gpio_reset_pin(LED);
     gpio_set_direction(LED, GPIO_MODE_OUTPUT);
 
     char* taskName = pcTaskGetName(NULL);
+
+    MockPH ph_source{6.5};
+    PHMetric ph(static_cast<PH&>(ph_source));
+
     while (1) {
         ESP_LOGI(taskName, "Hello world!\n");
+        ESP_LOGI(taskName, "%f", ph.measure());
         gpio_set_level(LED, 1);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         gpio_set_level(LED, 0);
