@@ -3,11 +3,12 @@
 
 
 #include "ph.hpp"
+#include "metric.hpp"
 
 /**
  * @brief pH Metric class that returns the pH reading from a pH source class object.
 */
-class PHMetric {  
+class PHMetric : public Metric<double> {  
     private:
     /**
      * @var pH source object, defined as a reference to a PH class for dynamic dispatch of PH interface sub-classes.
@@ -24,9 +25,8 @@ class PHMetric {
     /**
      * @brief Returns the measured pH from the source.
     */
-    double measure() {
-        return ph_source.getPH();
-    }
+    double measure();
+
 };
 
 #endif

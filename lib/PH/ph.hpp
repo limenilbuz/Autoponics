@@ -13,7 +13,7 @@ class PH {
     /**
      * @brief Gets the pH.
     */
-    virtual double getPH();
+    virtual double getPH() = 0;
 
 };
 

@@ -9,6 +9,8 @@
 #include "driver/gpio.h"
 #include "phmetric.hpp"
 #include "mockph.hpp"
+#include "waterlevelmetric.hpp"
+#include "mockwaterlevel.hpp"
 
 #define LED GPIO_NUM_2
 
@@ -24,6 +26,8 @@ extern "C" void app_main(void) {
     MockPH ph_source{6.5};
     PHMetric ph(static_cast<PH&>(ph_source));
 
+    MockWaterLevel wl_source;
+    WaterLevelMetric wl(static_cast<WaterLevel&>(wl_source));
     while (1) {
         ESP_LOGI(taskName, "Hello world!\n");
         ESP_LOGI(taskName, "%f", ph.measure());
