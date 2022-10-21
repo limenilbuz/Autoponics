@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['measure_0',['measure',['../classPHMetric.html#a20371e07516dda8703357c032a3c9892',1,'PHMetric']]],
-  ['mockph_1',['MockPH',['../classMockPH.html',1,'MockPH'],['../classMockPH.html#a650b3cedb863340185aea6f7f9a001bb',1,'MockPH::MockPH()']]]
+  ['getph_0',['getPH',['../classMockPH.html#ada3b1b468b06b6f2278169b1d8103752',1,'MockPH::getPH()'],['../classPH.html#a3a704579e9fdd336f59c990a7009e92e',1,'PH::getPH()']]]
 ];
