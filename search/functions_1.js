@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getph_0',['getPH',['../classMockPH.html#ada3b1b468b06b6f2278169b1d8103752',1,'MockPH::getPH()'],['../classPH.html#a3a704579e9fdd336f59c990a7009e92e',1,'PH::getPH()']]]
+  ['ecmetric_0',['ECMetric',['../classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0',1,'ECMetric']]]
 ];

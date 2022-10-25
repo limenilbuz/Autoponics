@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ESP32 Hydroponics: PH Class Reference</title>
+<title>ESP32 Hydroponics: RealPH Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -65,37 +65,43 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classPH-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">PH Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+<a href="classRealPH-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">RealPH Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classPH.html" title="PH source interface class. Defines one method for getting the pH.">PH</a> source interface class. Defines one method for getting the pH.  
- <a href="classPH.html#details">More...</a></p>
+<p>pH Source which interfaces with the pH sensor.  
+ <a href="classRealPH.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="ph_8hpp_source.html">ph.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="realph_8hpp_source.html">realph.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for PH:</div>
+Inheritance diagram for RealPH:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classPH.png" usemap="#PH_map" alt=""/>
-  <map id="PH_map" name="PH_map">
-<area href="classMockPH.html" title="Mock pH source which inherits from the PH interface." alt="MockPH" shape="rect" coords="0,56,60,80"/>
-<area href="classRealPH.html" title="pH Source which interfaces with the pH sensor." alt="RealPH" shape="rect" coords="70,56,130,80"/>
+  <img src="classRealPH.png" usemap="#RealPH_map" alt=""/>
+  <map id="RealPH_map" name="RealPH_map">
+<area href="classPH.html" title="PH source interface class. Defines one method for getting the pH." alt="PH" shape="rect" coords="0,0,54,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:afee341ccdc881602c7faf804cd50757d"><td class="memItemLeft" align="right" valign="top"><a id="afee341ccdc881602c7faf804cd50757d" name="afee341ccdc881602c7faf804cd50757d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RealPH</b> ()</td></tr>
+<tr class="memdesc:afee341ccdc881602c7faf804cd50757d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRealPH.html" title="pH Source which interfaces with the pH sensor.">RealPH</a> object. <br /></td></tr>
+<tr class="separator:afee341ccdc881602c7faf804cd50757d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e95894778ed8b488e4a29e9be29513"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">getPH</a> () override</td></tr>
+<tr class="memdesc:a84e95894778ed8b488e4a29e9be29513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH from the sensor.  <a href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">More...</a><br /></td></tr>
+<tr class="separator:a84e95894778ed8b488e4a29e9be29513"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a704579e9fdd336f59c990a7009e92e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">getPH</a> ()=0</td></tr>
 <tr class="memdesc:a3a704579e9fdd336f59c990a7009e92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH.  <a href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">More...</a><br /></td></tr>
 <tr class="separator:a3a704579e9fdd336f59c990a7009e92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p ><a class="el" href="classPH.html" title="PH source interface class. Defines one method for getting the pH.">PH</a> source interface class. Defines one method for getting the pH. </p>
+<div class="textblock"><p >pH Source which interfaces with the pH sensor. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3a704579e9fdd336f59c990a7009e92e" name="a3a704579e9fdd336f59c990a7009e92e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a704579e9fdd336f59c990a7009e92e">&#9670;&nbsp;</a></span>getPH()</h2>
+<a id="a84e95894778ed8b488e4a29e9be29513" name="a84e95894778ed8b488e4a29e9be29513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e95894778ed8b488e4a29e9be29513">&#9670;&nbsp;</a></span>getPH()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -104,7 +110,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual double PH::getPH </td>
+          <td class="memname">double RealPH::getPH </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -112,19 +118,20 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the pH. </p>
+<p>Gets the pH from the sensor. </p>
 
-<p>Implemented in <a class="el" href="classMockPH.html#ada3b1b468b06b6f2278169b1d8103752">MockPH</a>, and <a class="el" href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">RealPH</a>.</p>
+<p>Implements <a class="el" href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">PH</a>.</p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>lib/PH/<a class="el" href="ph_8hpp_source.html">ph.hpp</a></li>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>lib/PH/<a class="el" href="realph_8hpp_source.html">realph.hpp</a></li>
+<li>lib/PH/realph.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
