@@ -55,8 +55,11 @@ template <typename T> class CircBuf {
 
         /**
         * @brief Returns most recent entry.
+        * Returns -1 if there is no current data.
         */
-        T front(){
+        T front() {
+            if (sz == 0)      { return T{-1}; }
+            if (counter == 0) { return buffer[MAX_CAPACITY - 1]; }
             return buffer[(counter - 1)];
         }
 
