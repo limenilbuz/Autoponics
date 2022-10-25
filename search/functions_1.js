@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ecmetric_0',['ECMetric',['../classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0',1,'ECMetric']]]
+  ['circbuf_0',['CircBuf',['../classCircBuf.html#a5d0cd61a43586cbb56338762e3291451',1,'CircBuf']]]
 ];

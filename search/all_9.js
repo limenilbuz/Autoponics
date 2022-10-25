@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['size_0',['size',['../classCircBuf.html#a6b7e51632c465d9f8eb556647002b6d9',1,'CircBuf']]]
+  ['test_0',['Test',['../classTest.html',1,'']]],
+  ['toppm_1',['toPPM',['../classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db',1,'ECMetric']]]
 ];
