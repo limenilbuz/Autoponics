@@ -1,6 +1,12 @@
 #include "Test.hpp"
 #include <iostream>
+#include "CircBuf.hpp"
+using namespace std;
 
 Test::Test() {
-    std::cout << "Hello" << std::endl;
+    CircBuf <int> history;
+    cout << history.size() << endl;
+    history.push_front(2);
+    cout << history.front() << endl;
+    cout << history.accumulate() << endl;
 }
