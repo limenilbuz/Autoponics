@@ -1,6 +1,6 @@
 #ifndef METRIC_HPP
 #define METRIC_HPP
-#include <deque>
+#include "CircBuf.hpp"
 #include <numeric>
 
 #define MAX_HISTORY_SIZE 10
@@ -14,17 +14,13 @@ template <typename T> class Metric {
      * @var Represents the history of the data as a double ended queue.
      * TODO: CHANGE DEQUE TO CIRCULAR BUFFER!!!!
     */
-    std::deque<T> history;
+    std::CircBuf<T> history;
 
     public:
     /**
      * @brief Adds a data point to the history, shifting over all data if the size of history exceeds the max size.
     */
     void addToHistory(T data) {
-        if (history.size() == MAX_HISTORY_SIZE) {
-            history.pop_back();
-        }
-    
         history.push_front(data);
     }
     
@@ -32,7 +28,7 @@ template <typename T> class Metric {
      * @brief Returns the average of all the data points.
     */
     double average() {
-        T total = std::accumulate(history.begin(), history.end(), T{0});
+        T total = history.accumulate();
         return total / MAX_HISTORY_SIZE;
     }
 
