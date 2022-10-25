@@ -64,6 +64,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classECMetric-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">ECMetric Class Reference</div></div>
@@ -84,6 +85,15 @@ Inheritance diagram for ECMetric:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a0e8531ca23090e5159911a7a86b65ea0"><td class="memItemLeft" align="right" valign="top"><a id="a0e8531ca23090e5159911a7a86b65ea0" name="a0e8531ca23090e5159911a7a86b65ea0"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a> { <b>Hanna</b>
+, <b>Eutech</b>
+, <b>Truncheon</b>
+ }</td></tr>
+<tr class="memdesc:a0e8531ca23090e5159911a7a86b65ea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">PPM conversion enum type. Names the common conversions from <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> to PPM. <br /></td></tr>
+<tr class="separator:a0e8531ca23090e5159911a7a86b65ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a415ecb9dbcd54e3497ea691e70b5a0d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">ECMetric</a> (<a class="el" href="classEC.html">EC</a> &amp;source)</td></tr>
@@ -93,7 +103,7 @@ Public Member Functions</h2></td></tr>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>measure</b> ()</td></tr>
 <tr class="memdesc:ae1946b44f2f7e38fd795d2d4415a1237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the measured <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> from the source. <br /></td></tr>
 <tr class="separator:ae1946b44f2f7e38fd795d2d4415a1237"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bf261df3a0f1bf9ddb505cd728695db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">toPPM</a> (double ec_measurement, PPMConversion conversion_factor=PPMConversion::Hanna)</td></tr>
+<tr class="memitem:a4bf261df3a0f1bf9ddb505cd728695db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">toPPM</a> (double ec_measurement, <a class="el" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a> conversion_factor=PPMConversion::Hanna)</td></tr>
 <tr class="memdesc:a4bf261df3a0f1bf9ddb505cd728695db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> measurement to PPM using one of the standard conversion factors. See <a href="https://reefertilizer.com/blog/ec-to-ppm-conversion-calculator/">https://reefertilizer.com/blog/ec-to-ppm-conversion-calculator/</a> for more info.  <a href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">More...</a><br /></td></tr>
 <tr class="separator:a4bf261df3a0f1bf9ddb505cd728695db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classMetric"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMetric')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classMetric.html">Metric&lt; double &gt;</a></td></tr>
@@ -163,7 +173,7 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>mostRecent</b> ()</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">PPMConversion&#160;</td>
+          <td class="paramtype"><a class="el" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a>&#160;</td>
           <td class="paramname"><em>conversion_factor</em> = <code>PPMConversion::Hanna</code>&#160;</td>
         </tr>
         <tr>
