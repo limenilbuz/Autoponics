@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['measure_0',['measure',['../classECMetric.html#ae1946b44f2f7e38fd795d2d4415a1237',1,'ECMetric::measure()'],['../classPHMetric.html#a20371e07516dda8703357c032a3c9892',1,'PHMetric::measure()'],['../classWaterLevelMetric.html#a4cd65115a50e536b03ae615fda7717ae',1,'WaterLevelMetric::measure()']]],
-  ['metric_1',['Metric',['../classMetric.html',1,'']]],
-  ['metric_3c_20bool_20_3e_2',['Metric&lt; bool &gt;',['../classMetric.html',1,'']]],
-  ['metric_3c_20double_20_3e_3',['Metric&lt; double &gt;',['../classMetric.html',1,'']]],
-  ['mockec_4',['MockEC',['../classMockEC.html',1,'MockEC'],['../classMockEC.html#aa00bcf4801157e79cb07f6d9f9ab3542',1,'MockEC::MockEC()']]],
-  ['mockph_5',['MockPH',['../classMockPH.html',1,'MockPH'],['../classMockPH.html#a650b3cedb863340185aea6f7f9a001bb',1,'MockPH::MockPH()']]],
-  ['mockwaterlevel_6',['MockWaterLevel',['../classMockWaterLevel.html',1,'']]],
-  ['mostrecent_7',['mostRecent',['../classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53',1,'Metric']]]
+  ['getec_0',['getEC',['../classEC.html#ab20ab7ee80692277e2091f37ae6c9741',1,'EC::getEC()'],['../classMockEC.html#a4d1dd2b6ecdd49228f8c0d6f152c2886',1,'MockEC::getEC()']]],
+  ['getph_1',['getPH',['../classMockPH.html#ada3b1b468b06b6f2278169b1d8103752',1,'MockPH::getPH()'],['../classPH.html#a3a704579e9fdd336f59c990a7009e92e',1,'PH::getPH()'],['../classRealPH.html#a84e95894778ed8b488e4a29e9be29513',1,'RealPH::getPH()']]]
 ];
