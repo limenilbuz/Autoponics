@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ecmetric_0',['ECMetric',['../classECMetric.html',1,'']]]
+  ['ec_0',['EC',['../classEC.html',1,'']]],
+  ['ecmetric_1',['ECMetric',['../classECMetric.html',1,'']]]
 ];

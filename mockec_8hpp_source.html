@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MOCK_EC_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;ec.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classMockEC.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classMockEC.html">MockEC</a> : <span class="keyword">public</span> EC {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classMockEC.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classMockEC.html">MockEC</a> : <span class="keyword">public</span> <a class="code hl_class" href="classEC.html">EC</a> {</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">double</span> mock_ec_data;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    </div>
@@ -84,6 +84,7 @@ $(function() {
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassEC_html"><div class="ttname"><a href="classEC.html">EC</a></div><div class="ttdoc">EC source interface class. Defines one method for getting the EC.</div><div class="ttdef"><b>Definition:</b> ec.hpp:9</div></div>
 <div class="ttc" id="aclassMockEC_html"><div class="ttname"><a href="classMockEC.html">MockEC</a></div><div class="ttdoc">Mock EC source which inherits from the EC interface.</div><div class="ttdef"><b>Definition:</b> mockec.hpp:8</div></div>
 <div class="ttc" id="aclassMockEC_html_a4d1dd2b6ecdd49228f8c0d6f152c2886"><div class="ttname"><a href="classMockEC.html#a4d1dd2b6ecdd49228f8c0d6f152c2886">MockEC::getEC</a></div><div class="ttdeci">double getEC() override</div><div class="ttdoc">Returns the mock EC data plus or minus 2.</div><div class="ttdef"><b>Definition:</b> mockec.cpp:4</div></div>
 <div class="ttc" id="aclassMockEC_html_aa00bcf4801157e79cb07f6d9f9ab3542"><div class="ttname"><a href="classMockEC.html#aa00bcf4801157e79cb07f6d9f9ab3542">MockEC::MockEC</a></div><div class="ttdeci">MockEC(double mock_ec_data)</div><div class="ttdoc">Constructs the mock EC data class.</div><div class="ttdef"><b>Definition:</b> mockec.hpp:19</div></div>
