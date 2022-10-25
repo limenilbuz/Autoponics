@@ -14,7 +14,7 @@ template <typename T> class Metric {
      * @var Represents the history of the data as a double ended queue.
      * TODO: CHANGE DEQUE TO CIRCULAR BUFFER!!!!
     */
-    std::CircBuf<T> history;
+    CircBuf<T> history;
 
     public:
     /**

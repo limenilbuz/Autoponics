@@ -12,7 +12,7 @@ class RealPH : public PH {
     /**
      * @brief Constructs a RealPH object.
     */
-    RealPH();
+    RealPH() = default;
 
     /**
      * @brief Gets the pH from the sensor.

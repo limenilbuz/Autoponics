@@ -1,6 +1,8 @@
 #ifndef CircBuf_HPP
 #define CircBuf_HPP
 
+
+#define MAX_CAPACITY 10
 /**
  * @brief Container class for unique data structure in metric.hpp
 */
@@ -8,47 +10,54 @@ template <typename T> class CircBuf {
 
     private:
         /**
-        * @brief Define static array
+        * @var Static array of length 10
         */
-        T history[10];
+        T buffer[MAX_CAPACITY];
 
         /**
-        * @brief Allows us to keep track of where in the "circle" we are, i.e at the oldest entry
+        * @var Allows us to keep track of where in the "circle" we are, i.e at the oldest entry
         */
-        int counter = 0;
+        int counter;
+
+        /**
+         * @var Current size.
+        */
+        int sz;
 
     public:
+        CircBuf() : buffer{T[MAX_CAPACITY]}, counter{0}, sz{0}
         /**
-        * @brief returns size, always at 10
+        * @brief Returns current size, capped at 10.
         */
         int size (){
-            return 10;
+            return sz;
         }
 
         /**
-        * @brief Adds a data point to the history, deleting the entry that was there, which was the oldest entry
+        * @brief Adds a data point to the buffer, deleting the entry that was there, which was the oldest entry
         */
         void push_front(T data){
-            history[counter%10] = data;
-            counter++;
+            buffer[counter] = data;
+            counter = (++counter) % 10;
+            if (sz < 10) { sz++ ;}
         }
 
         /**
-        * @brief returns sum of all data entries so far
+        * @brief Returns sum of all data entries so far.
         */
         T accumulate(){
             T sum = T{0};
-            for(int i = 0; i < 10; i++){
-                sum += history[i];
+            for(int i = 0; i < sz; i++){
+                sum += buffer[i];
             }
             return sum;
         }
 
         /**
-        * @brief returns most recent entry
+        * @brief Returns most recent entry.
         */
         T front(){
-            return history[(counter - 1) % 10];
+            return buffer[(counter - 1)];
         }
 
 };
