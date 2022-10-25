@@ -11,6 +11,7 @@
 #include "mockph.hpp"
 #include "waterlevelmetric.hpp"
 #include "mockwaterlevel.hpp"
+#include "realph.hpp"
 
 #define LED GPIO_NUM_2
 
@@ -23,7 +24,11 @@ extern "C" void app_main(void) {
 
     char* taskName = pcTaskGetName(NULL);
 
+    #if DEBUG
     MockPH ph_source{6.5};
+    #else
+    RealPH ph_source;
+    #endif
     PHMetric ph(static_cast<PH&>(ph_source));
 
     MockWaterLevel wl_source;
