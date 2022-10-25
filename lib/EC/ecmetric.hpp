@@ -17,6 +17,12 @@ class ECMetric : public Metric<double> {
     
     public:
     /**
+    * @brief PPM conversion enum type.
+    * Names the common conversions from EC to PPM.
+    */
+    enum PPMConversion {Hanna, Eutech, Truncheon};
+
+    /**
      * @brief Constructs a ECMetric class object.
      * @param source Represents the source of the EC measurement (mock or real).
     */

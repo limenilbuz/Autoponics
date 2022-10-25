@@ -17,11 +17,6 @@ class EC {
 
 };
 
-/**
- * @brief PPM conversion enum type.
- * Names the common conversions from EC to PPM.
-*/
-enum PPMConversion {Hanna, Eutech, Truncheon};
 
 
 #endif
