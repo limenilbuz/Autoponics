@@ -24,8 +24,11 @@ extern "C" void app_main(void) {
 
     char* taskName = pcTaskGetName(NULL);
 
-    //MockPH ph_source{6.5};
+    #if DEBUG
+    MockPH ph_source{6.5};
+    #else
     RealPH ph_source;
+    #endif
     PHMetric ph(static_cast<PH&>(ph_source));
 
     MockWaterLevel wl_source;
