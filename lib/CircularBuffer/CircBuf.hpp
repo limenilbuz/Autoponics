@@ -17,19 +17,19 @@ template <typename T> class CircBuf {
         /**
         * @var Allows us to keep track of where in the "circle" we are, i.e at the oldest entry
         */
-        int counter;
+        int counter = 0;
 
         /**
          * @var Current size.
         */
-        int sz;
+        int sz = 0;
 
     public:
-        CircBuf() : buffer{T[MAX_CAPACITY]}, counter{0}, sz{0}
+        CircBuf() : buffer{T{0}}, counter{0}, sz{0} {}
         /**
         * @brief Returns current size, capped at 10.
         */
-        int size (){
+        int size() {
             return sz;
         }
 
@@ -38,7 +38,8 @@ template <typename T> class CircBuf {
         */
         void push_front(T data){
             buffer[counter] = data;
-            counter = (++counter) % 10;
+            int temp = (++counter) % 10;
+            counter = temp;
             if (sz < 10) { sz++ ;}
         }
 
