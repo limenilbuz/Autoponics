@@ -14,5 +14,8 @@ int ECMetric::toPPM(double ec_measurement, PPMConversion conversion_factor) {
             return 64 * ec_measurement;
         case PPMConversion::Truncheon:
             return 70 * ec_measurement;
-    } 
+        default:
+            return 50 * ec_measurement;
+    }
+
 }
