@@ -14,17 +14,21 @@
 #include "realph.hpp"
 #include "mockec.hpp"
 #include "ecmetric.hpp"
+#include "driver/adc.h"
+#include "esp_adc_cal.h"
 
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
 #define LED GPIO_NUM_2
 #define SIMULATION_MODE 1
 
-struct Threshold {
+struct Baseline {
     double PH, EC;
 };
 
-Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
+struct Threshold {
+    double PH_THRESHOLD, EC_THRESHOLD;
+};
 
 struct SystemMeasurements {
     double PH;
@@ -32,6 +36,8 @@ struct SystemMeasurements {
     bool WaterLevel;
 };
 
+Baseline BASELINE{.PH = 6.0, .EC = 2.0};
+Threshold THRESHOLD{.PH_THRESHOLD = 0.5, .EC_THRESHOLD = 0.5};
 SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .WaterLevel = false};
 
 
@@ -41,6 +47,20 @@ void blinkTask(void* pvParameters) {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
         gpio_set_level(LED, 0);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
+    }
+}
+
+static esp_adc_cal_characteristics_t adc1_chars;
+void resistorTask(void* pvParameters) {
+    uint32_t voltage;
+    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
+    ESP_ERROR_CHECK(adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT));
+    ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11));
+    
+    while (true) {
+        voltage = esp_adc_cal_raw_to_voltage(adc1_get_raw(ADC1_CHANNEL_6), &adc1_chars);
+        ESP_LOGI("RESISTOR", "ADC1_CHANNEL_6: %d mV", voltage);
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
@@ -55,12 +75,12 @@ void pHTask(void* pvParameters) {
                  "The current measurement is: %f\nThe average is: %f",
                   measurement, average);
 
-        if (measurement > THRESHOLD.PH+0.5) 
+        if (measurement > BASELINE.PH+THRESHOLD.PH_THRESHOLD) 
         {
             ESP_LOGI("PH MEASUREMENT", "Too high!");
             gpio_set_level(LED, 1);
         }
-        else if (measurement < THRESHOLD.PH-0.5)
+        else if (measurement < BASELINE.PH-THRESHOLD.PH_THRESHOLD)
         {
             ESP_LOGI("PH MEASUREMENT", "Too low!");
             gpio_set_level(LED, 1);
@@ -70,7 +90,8 @@ void pHTask(void* pvParameters) {
             ESP_LOGI("PH MEASUREMENT", "Just right :)");
             gpio_set_level(LED, 0);
         }
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+        vTaskDelay(5000 / portTICK_PERIOD_MS);
 
     }
 }
@@ -97,9 +118,8 @@ extern "C" void app_main(void) {
     gpio_set_direction(LED, GPIO_MODE_OUTPUT);
 
     char* taskName = pcTaskGetName(NULL);
-
-    
     
     //xTaskCreate(blinkTask, "blink task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, &ph, TASK_PRIORITY, NULL);
+    //xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, &ph, TASK_PRIORITY, NULL);
+    xTaskCreate(resistorTask, "resistor", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }

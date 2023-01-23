@@ -25,7 +25,7 @@ template <typename T> class CircBuf {
         int sz = 0;
 
     public:
-        CircBuf() : buffer{T{0}}, counter{0}, sz{0} {}
+        CircBuf() : buffer{}, counter{0}, sz{0} {}
         /**
         * @brief Returns current size, capped at 10.
         */
