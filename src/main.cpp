@@ -11,6 +11,7 @@
 #include "mockph.hpp"
 #include "waterlevelmetric.hpp"
 #include "mockwaterlevel.hpp"
+#include "realwaterlevel.hpp"
 #include "realph.hpp"
 #include "mockec.hpp"
 #include "ecmetric.hpp"
@@ -18,7 +19,7 @@
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
 #define LED GPIO_NUM_2
-#define SIMULATION_MODE 1
+#define SIMULATION_MODE 0
 
 struct Threshold {
     double PH, EC;
@@ -78,16 +79,27 @@ void pHTask(void* pvParameters) {
 
 #endif
 
-#if SIMULATION_MODE
-MockPH ph_source{6.5};
-MockEC ec_source{2.0};
-MockWaterLevel wl_source;
-#else
+
+void waterLevelTask(void* pvParameters) {
+    RealWaterLevel wl_source{};
+    //WaterLevelMetric wl_metric(wl_source);
+
+    while (true) {
+        auto measurement = wl_source.isHigh();
+        ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
+        gpio_set_level(LED, measurement);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
+}
+
+
+
+
 RealPH ph_source;
-#endif
+
 PHMetric ph(ph_source);
-ECMetric ec(ec_source);
-WaterLevelMetric wl(wl_source);
+//ECMetric ec(ec_source);
+//WaterLevelMetric wl(wl_source);
 
 /**
  * @brief The main function. Currenlty blinker example.
@@ -95,11 +107,10 @@ WaterLevelMetric wl(wl_source);
 extern "C" void app_main(void) {
     gpio_reset_pin(LED);
     gpio_set_direction(LED, GPIO_MODE_OUTPUT);
-
     char* taskName = pcTaskGetName(NULL);
 
     
-    
+    xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     //xTaskCreate(blinkTask, "blink task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, &ph, TASK_PRIORITY, NULL);
+    //xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, &ph, TASK_PRIORITY, NULL);
 }

@@ -31,19 +31,27 @@ class Pump {
 
     /**
      * @brief Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter.
+     * 
      * Time based approach works since we are not using any PWM modules for the pump, 
      * and are relying on a constant voltage to power the DC motor.
      * 
      * There are several pros and cons to this approach.
      * 
      * Pros:
+     * 
      * Time-based approach is simple to understand.
+     * 
      * The logic is very easy to implement.
      * 
+     * 
      * Cons:
+     * 
      * Unidirectional pump flow.
+     * 
      * Fixed voltage = fixed flow rate.
+     * 
      * Calibration needs to be very good to ensure accurate dosing.
+     * 
      * Relay has some activation time, might cause inaccurate dosage.
     */
     void activate(milliliter volume);
