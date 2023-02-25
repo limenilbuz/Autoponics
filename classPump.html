@@ -82,7 +82,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a1588059f83afb8f8bd14c6de400f1d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the pump object. <br /></td></tr>
 <tr class="separator:a1588059f83afb8f8bd14c6de400f1d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf416762fd103c5fd175f00643ca33f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPump.html#adf416762fd103c5fd175f00643ca33f0">activate</a> (milliliter volume)</td></tr>
-<tr class="memdesc:adf416762fd103c5fd175f00643ca33f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter. Time based approach works since we are not using any PWM modules for the pump, and are relying on a constant voltage to power the DC motor.  <a href="classPump.html#adf416762fd103c5fd175f00643ca33f0">More...</a><br /></td></tr>
+<tr class="memdesc:adf416762fd103c5fd175f00643ca33f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter.  <a href="classPump.html#adf416762fd103c5fd175f00643ca33f0">More...</a><br /></td></tr>
 <tr class="separator:adf416762fd103c5fd175f00643ca33f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617e5055d1a59a4db23b02435ef3002a"><td class="memItemLeft" align="right" valign="top"><a id="a617e5055d1a59a4db23b02435ef3002a" name="a617e5055d1a59a4db23b02435ef3002a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>calibrate</b> ()</td></tr>
@@ -108,10 +108,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>calibrate</b> ()</td>
       </table>
 </div><div class="memdoc">
 
-<p>Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter. Time based approach works since we are not using any PWM modules for the pump, and are relying on a constant voltage to power the DC motor. </p>
+<p>Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter. </p>
+<p >Time based approach works since we are not using any PWM modules for the pump, and are relying on a constant voltage to power the DC motor.</p>
 <p >There are several pros and cons to this approach.</p>
-<p >Pros: Time-based approach is simple to understand. The logic is very easy to implement.</p>
-<p >Cons: Unidirectional pump flow. Fixed voltage = fixed flow rate. Calibration needs to be very good to ensure accurate dosing. Relay has some activation time, might cause inaccurate dosage. </p>
+<p >Pros:</p>
+<p >Time-based approach is simple to understand.</p>
+<p >The logic is very easy to implement.</p>
+<p >Cons:</p>
+<p >Unidirectional pump flow.</p>
+<p >Fixed voltage = fixed flow rate.</p>
+<p >Calibration needs to be very good to ensure accurate dosing.</p>
+<p >Relay has some activation time, might cause inaccurate dosage. </p>
 
 </div>
 </div>
