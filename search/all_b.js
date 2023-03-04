@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['waterlevel_0',['WaterLevel',['../classWaterLevel.html',1,'']]],
-  ['waterlevelmetric_1',['WaterLevelMetric',['../classWaterLevelMetric.html',1,'WaterLevelMetric'],['../classWaterLevelMetric.html#acd00817f86e31e2ab6cef5a38f82d58c',1,'WaterLevelMetric::WaterLevelMetric()']]]
+  ['voltagetoec_0',['voltageToEC',['../classRealEC.html#a2445023bb8f77af1a7fc196511f2d0fe',1,'RealEC']]],
+  ['voltagetotemp_1',['voltageToTemp',['../classRealEC.html#a960ff0ae488db04d9deffe698c47999d',1,'RealEC']]]
 ];
