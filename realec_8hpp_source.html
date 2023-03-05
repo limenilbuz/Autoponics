@@ -87,11 +87,11 @@ $(function() {
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">double</span> calibration_value = 1.0;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    adc1_channel_t temp_read_pin; </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    adc_channel_t ec_read_pin; </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    adc1_channel_t ec_read_pin; </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    esp_adc_cal_characteristics_t adc1_chars;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_function" href="classRealEC.html#a96bf5dfd437b45153445db2087e101e7">RealEC</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classRealEC.html#a3604a8089f7e2c725412684d62611c9e">RealEC</a>(esp_adc_cal_characteristics_t adc1_chars);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classRealEC.html#a2e8c21b2000740cb9bc1a99cb450aa32">getEC</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
@@ -100,18 +100,21 @@ $(function() {
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>   <span class="keywordtype">double</span> <a class="code hl_function" href="classRealEC.html#a960ff0ae488db04d9deffe698c47999d">voltageToTemp</a>(uint32_t voltage);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>   uint32_t <a class="code hl_function" href="classRealEC.html#a249d000a0cc08820f325f6f51b78ff4d">getTempMV</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>   uint32_t <a class="code hl_function" href="classRealEC.html#ad39c4e22414f6ac5c306c9de0faac6fc">getTemp_mV</a>();</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>};</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>   uint32_t <a class="code hl_function" href="classRealEC.html#a425e20953f6f9edb7640db57f3ef5e2e">getEC_mV</a>();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassEC_html"><div class="ttname"><a href="classEC.html">EC</a></div><div class="ttdoc">EC source interface class. Defines one method for getting the EC.</div><div class="ttdef"><b>Definition:</b> ec.hpp:9</div></div>
 <div class="ttc" id="aclassRealEC_html"><div class="ttname"><a href="classRealEC.html">RealEC</a></div><div class="ttdoc">Real EC source which inherits from the EC interface.</div><div class="ttdef"><b>Definition:</b> realec.hpp:17</div></div>
-<div class="ttc" id="aclassRealEC_html_a2445023bb8f77af1a7fc196511f2d0fe"><div class="ttname"><a href="classRealEC.html#a2445023bb8f77af1a7fc196511f2d0fe">RealEC::voltageToEC</a></div><div class="ttdeci">double voltageToEC(double voltage)</div><div class="ttdoc">Converts a voltage to the EC in us/cm.</div><div class="ttdef"><b>Definition:</b> realec.cpp:22</div></div>
-<div class="ttc" id="aclassRealEC_html_a249d000a0cc08820f325f6f51b78ff4d"><div class="ttname"><a href="classRealEC.html#a249d000a0cc08820f325f6f51b78ff4d">RealEC::getTempMV</a></div><div class="ttdeci">uint32_t getTempMV()</div><div class="ttdoc">Gets the millivolt value of the temperature pin.</div><div class="ttdef"><b>Definition:</b> realec.cpp:16</div></div>
+<div class="ttc" id="aclassRealEC_html_a2445023bb8f77af1a7fc196511f2d0fe"><div class="ttname"><a href="classRealEC.html#a2445023bb8f77af1a7fc196511f2d0fe">RealEC::voltageToEC</a></div><div class="ttdeci">double voltageToEC(double voltage)</div><div class="ttdoc">Converts a voltage to the EC in us/cm.</div><div class="ttdef"><b>Definition:</b> realec.cpp:30</div></div>
 <div class="ttc" id="aclassRealEC_html_a2e8c21b2000740cb9bc1a99cb450aa32"><div class="ttname"><a href="classRealEC.html#a2e8c21b2000740cb9bc1a99cb450aa32">RealEC::getEC</a></div><div class="ttdeci">double getEC() override</div><div class="ttdoc">Returns the real EC data.</div><div class="ttdef"><b>Definition:</b> realec.cpp:12</div></div>
-<div class="ttc" id="aclassRealEC_html_a960ff0ae488db04d9deffe698c47999d"><div class="ttname"><a href="classRealEC.html#a960ff0ae488db04d9deffe698c47999d">RealEC::voltageToTemp</a></div><div class="ttdeci">double voltageToTemp(uint32_t voltage)</div><div class="ttdoc">Converts a voltage to temperature in Celsius.</div><div class="ttdef"><b>Definition:</b> realec.cpp:33</div></div>
-<div class="ttc" id="aclassRealEC_html_a96bf5dfd437b45153445db2087e101e7"><div class="ttname"><a href="classRealEC.html#a96bf5dfd437b45153445db2087e101e7">RealEC::RealEC</a></div><div class="ttdeci">RealEC()</div><div class="ttdoc">Constructs the real EC data class.</div><div class="ttdef"><b>Definition:</b> realec.cpp:6</div></div>
+<div class="ttc" id="aclassRealEC_html_a3604a8089f7e2c725412684d62611c9e"><div class="ttname"><a href="classRealEC.html#a3604a8089f7e2c725412684d62611c9e">RealEC::RealEC</a></div><div class="ttdeci">RealEC(esp_adc_cal_characteristics_t adc1_chars)</div><div class="ttdoc">Constructs the real EC data class.</div><div class="ttdef"><b>Definition:</b> realec.cpp:6</div></div>
+<div class="ttc" id="aclassRealEC_html_a425e20953f6f9edb7640db57f3ef5e2e"><div class="ttname"><a href="classRealEC.html#a425e20953f6f9edb7640db57f3ef5e2e">RealEC::getEC_mV</a></div><div class="ttdeci">uint32_t getEC_mV()</div><div class="ttdoc">Gets the millivolt value of the EC pin.</div><div class="ttdef"><b>Definition:</b> realec.cpp:25</div></div>
+<div class="ttc" id="aclassRealEC_html_a960ff0ae488db04d9deffe698c47999d"><div class="ttname"><a href="classRealEC.html#a960ff0ae488db04d9deffe698c47999d">RealEC::voltageToTemp</a></div><div class="ttdeci">double voltageToTemp(uint32_t voltage)</div><div class="ttdoc">Converts a voltage to temperature in Celsius.</div><div class="ttdef"><b>Definition:</b> realec.cpp:41</div></div>
+<div class="ttc" id="aclassRealEC_html_ad39c4e22414f6ac5c306c9de0faac6fc"><div class="ttname"><a href="classRealEC.html#ad39c4e22414f6ac5c306c9de0faac6fc">RealEC::getTemp_mV</a></div><div class="ttdeci">uint32_t getTemp_mV()</div><div class="ttdoc">Gets the millivolt value of the temperature pin.</div><div class="ttdef"><b>Definition:</b> realec.cpp:20</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

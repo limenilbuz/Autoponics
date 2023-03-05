@@ -86,10 +86,10 @@ Inheritance diagram for RealEC:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a96bf5dfd437b45153445db2087e101e7"><td class="memItemLeft" align="right" valign="top"><a id="a96bf5dfd437b45153445db2087e101e7" name="a96bf5dfd437b45153445db2087e101e7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RealEC</b> ()</td></tr>
-<tr class="memdesc:a96bf5dfd437b45153445db2087e101e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the real <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> data class. <br /></td></tr>
-<tr class="separator:a96bf5dfd437b45153445db2087e101e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3604a8089f7e2c725412684d62611c9e"><td class="memItemLeft" align="right" valign="top"><a id="a3604a8089f7e2c725412684d62611c9e" name="a3604a8089f7e2c725412684d62611c9e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RealEC</b> (esp_adc_cal_characteristics_t adc1_chars)</td></tr>
+<tr class="memdesc:a3604a8089f7e2c725412684d62611c9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs the real <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> data class. <br /></td></tr>
+<tr class="separator:a3604a8089f7e2c725412684d62611c9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e8c21b2000740cb9bc1a99cb450aa32"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealEC.html#a2e8c21b2000740cb9bc1a99cb450aa32">getEC</a> () override</td></tr>
 <tr class="memdesc:a2e8c21b2000740cb9bc1a99cb450aa32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> data.  <a href="classRealEC.html#a2e8c21b2000740cb9bc1a99cb450aa32">More...</a><br /></td></tr>
 <tr class="separator:a2e8c21b2000740cb9bc1a99cb450aa32"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,10 +104,14 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>voltageToEC</b> (do
 double&#160;</td><td class="memItemRight" valign="bottom"><b>voltageToTemp</b> (uint32_t voltage)</td></tr>
 <tr class="memdesc:a960ff0ae488db04d9deffe698c47999d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a voltage to temperature in Celsius. <br /></td></tr>
 <tr class="separator:a960ff0ae488db04d9deffe698c47999d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a249d000a0cc08820f325f6f51b78ff4d"><td class="memItemLeft" align="right" valign="top"><a id="a249d000a0cc08820f325f6f51b78ff4d" name="a249d000a0cc08820f325f6f51b78ff4d"></a>
-uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTempMV</b> ()</td></tr>
-<tr class="memdesc:a249d000a0cc08820f325f6f51b78ff4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the millivolt value of the temperature pin. <br /></td></tr>
-<tr class="separator:a249d000a0cc08820f325f6f51b78ff4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad39c4e22414f6ac5c306c9de0faac6fc"><td class="memItemLeft" align="right" valign="top"><a id="ad39c4e22414f6ac5c306c9de0faac6fc" name="ad39c4e22414f6ac5c306c9de0faac6fc"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getTemp_mV</b> ()</td></tr>
+<tr class="memdesc:ad39c4e22414f6ac5c306c9de0faac6fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the millivolt value of the temperature pin. <br /></td></tr>
+<tr class="separator:ad39c4e22414f6ac5c306c9de0faac6fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a425e20953f6f9edb7640db57f3ef5e2e"><td class="memItemLeft" align="right" valign="top"><a id="a425e20953f6f9edb7640db57f3ef5e2e" name="a425e20953f6f9edb7640db57f3ef5e2e"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getEC_mV</b> ()</td></tr>
+<tr class="memdesc:a425e20953f6f9edb7640db57f3ef5e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the millivolt value of the <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a> pin. <br /></td></tr>
+<tr class="separator:a425e20953f6f9edb7640db57f3ef5e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab20ab7ee80692277e2091f37ae6c9741"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEC.html#ab20ab7ee80692277e2091f37ae6c9741">getEC</a> ()=0</td></tr>
 <tr class="memdesc:ab20ab7ee80692277e2091f37ae6c9741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="classEC.html" title="EC source interface class. Defines one method for getting the EC.">EC</a>.  <a href="classEC.html#ab20ab7ee80692277e2091f37ae6c9741">More...</a><br /></td></tr>
 <tr class="separator:ab20ab7ee80692277e2091f37ae6c9741"><td class="memSeparator" colspan="2">&#160;</td></tr>
