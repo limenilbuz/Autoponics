@@ -83,18 +83,24 @@ $(function() {
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    esp_adc_cal_characteristics_t adc1_chars;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="classRealPH.html#afee341ccdc881602c7faf804cd50757d">RealPH</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">explicit</span> <a class="code hl_function" href="classRealPH.html#a293f3f6497ade511d4a04abcf7c44c10">RealPH</a>(esp_adc_cal_characteristics_t adc1_chars);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    uint32_t <a class="code hl_function" href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">getPH</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">getPH</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    uint32_t <a class="code hl_function" href="classRealPH.html#a8cf01db9fafd55d11ca10931a101bf5e">getPH_mV</a>();</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classRealPH.html#a21d2f7c7c62d4df1402f9980fcd909ef">voltageToPH</a>(uint32_t voltage);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassPH_html"><div class="ttname"><a href="classPH.html">PH</a></div><div class="ttdoc">PH source interface class. Defines one method for getting the pH.</div><div class="ttdef"><b>Definition:</b> ph.hpp:9</div></div>
 <div class="ttc" id="aclassRealPH_html"><div class="ttname"><a href="classRealPH.html">RealPH</a></div><div class="ttdoc">pH Source which interfaces with the pH sensor.</div><div class="ttdef"><b>Definition:</b> realph.hpp:11</div></div>
-<div class="ttc" id="aclassRealPH_html_ae2c312a6c96f9ad42105e7b9fc2dbf98"><div class="ttname"><a href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">RealPH::getPH</a></div><div class="ttdeci">uint32_t getPH() override</div><div class="ttdoc">Gets the pH from the sensor.</div><div class="ttdef"><b>Definition:</b> realph.cpp:12</div></div>
-<div class="ttc" id="aclassRealPH_html_afee341ccdc881602c7faf804cd50757d"><div class="ttname"><a href="classRealPH.html#afee341ccdc881602c7faf804cd50757d">RealPH::RealPH</a></div><div class="ttdeci">RealPH()</div><div class="ttdoc">Constructs a RealPH object.</div><div class="ttdef"><b>Definition:</b> realph.cpp:6</div></div>
+<div class="ttc" id="aclassRealPH_html_a21d2f7c7c62d4df1402f9980fcd909ef"><div class="ttname"><a href="classRealPH.html#a21d2f7c7c62d4df1402f9980fcd909ef">RealPH::voltageToPH</a></div><div class="ttdeci">double voltageToPH(uint32_t voltage)</div><div class="ttdoc">Returns the real pH data.</div><div class="ttdef"><b>Definition:</b> realph.cpp:22</div></div>
+<div class="ttc" id="aclassRealPH_html_a293f3f6497ade511d4a04abcf7c44c10"><div class="ttname"><a href="classRealPH.html#a293f3f6497ade511d4a04abcf7c44c10">RealPH::RealPH</a></div><div class="ttdeci">RealPH(esp_adc_cal_characteristics_t adc1_chars)</div><div class="ttdoc">Constructs a RealPH object.</div><div class="ttdef"><b>Definition:</b> realph.cpp:6</div></div>
+<div class="ttc" id="aclassRealPH_html_a84e95894778ed8b488e4a29e9be29513"><div class="ttname"><a href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">RealPH::getPH</a></div><div class="ttdeci">double getPH() override</div><div class="ttdoc">Gets the pH from the sensor.</div><div class="ttdef"><b>Definition:</b> realph.cpp:10</div></div>
+<div class="ttc" id="aclassRealPH_html_a8cf01db9fafd55d11ca10931a101bf5e"><div class="ttname"><a href="classRealPH.html#a8cf01db9fafd55d11ca10931a101bf5e">RealPH::getPH_mV</a></div><div class="ttdeci">uint32_t getPH_mV()</div><div class="ttdoc">Converts a voltage to the pH.</div><div class="ttdef"><b>Definition:</b> realph.cpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

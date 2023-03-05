@@ -86,22 +86,30 @@ Inheritance diagram for RealPH:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afee341ccdc881602c7faf804cd50757d"><td class="memItemLeft" align="right" valign="top"><a id="afee341ccdc881602c7faf804cd50757d" name="afee341ccdc881602c7faf804cd50757d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RealPH</b> ()</td></tr>
-<tr class="memdesc:afee341ccdc881602c7faf804cd50757d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRealPH.html" title="pH Source which interfaces with the pH sensor.">RealPH</a> object. <br /></td></tr>
-<tr class="separator:afee341ccdc881602c7faf804cd50757d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2c312a6c96f9ad42105e7b9fc2dbf98"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">getPH</a> () override</td></tr>
-<tr class="memdesc:ae2c312a6c96f9ad42105e7b9fc2dbf98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH from the sensor.  <a href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">More...</a><br /></td></tr>
-<tr class="separator:ae2c312a6c96f9ad42105e7b9fc2dbf98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a18694dc909732187311df4349f6c33"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPH.html#a1a18694dc909732187311df4349f6c33">getPH</a> ()=0</td></tr>
-<tr class="memdesc:a1a18694dc909732187311df4349f6c33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH.  <a href="classPH.html#a1a18694dc909732187311df4349f6c33">More...</a><br /></td></tr>
-<tr class="separator:a1a18694dc909732187311df4349f6c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a293f3f6497ade511d4a04abcf7c44c10"><td class="memItemLeft" align="right" valign="top"><a id="a293f3f6497ade511d4a04abcf7c44c10" name="a293f3f6497ade511d4a04abcf7c44c10"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>RealPH</b> (esp_adc_cal_characteristics_t adc1_chars)</td></tr>
+<tr class="memdesc:a293f3f6497ade511d4a04abcf7c44c10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRealPH.html" title="pH Source which interfaces with the pH sensor.">RealPH</a> object. <br /></td></tr>
+<tr class="separator:a293f3f6497ade511d4a04abcf7c44c10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e95894778ed8b488e4a29e9be29513"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">getPH</a> () override</td></tr>
+<tr class="memdesc:a84e95894778ed8b488e4a29e9be29513"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH from the sensor.  <a href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">More...</a><br /></td></tr>
+<tr class="separator:a84e95894778ed8b488e4a29e9be29513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf01db9fafd55d11ca10931a101bf5e"><td class="memItemLeft" align="right" valign="top"><a id="a8cf01db9fafd55d11ca10931a101bf5e" name="a8cf01db9fafd55d11ca10931a101bf5e"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getPH_mV</b> ()</td></tr>
+<tr class="memdesc:a8cf01db9fafd55d11ca10931a101bf5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a voltage to the pH. <br /></td></tr>
+<tr class="separator:a8cf01db9fafd55d11ca10931a101bf5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21d2f7c7c62d4df1402f9980fcd909ef"><td class="memItemLeft" align="right" valign="top"><a id="a21d2f7c7c62d4df1402f9980fcd909ef" name="a21d2f7c7c62d4df1402f9980fcd909ef"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>voltageToPH</b> (uint32_t voltage)</td></tr>
+<tr class="memdesc:a21d2f7c7c62d4df1402f9980fcd909ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real pH data. <br /></td></tr>
+<tr class="separator:a21d2f7c7c62d4df1402f9980fcd909ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a704579e9fdd336f59c990a7009e92e"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">getPH</a> ()=0</td></tr>
+<tr class="memdesc:a3a704579e9fdd336f59c990a7009e92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pH.  <a href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">More...</a><br /></td></tr>
+<tr class="separator:a3a704579e9fdd336f59c990a7009e92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >pH Source which interfaces with the pH sensor. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae2c312a6c96f9ad42105e7b9fc2dbf98" name="ae2c312a6c96f9ad42105e7b9fc2dbf98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2c312a6c96f9ad42105e7b9fc2dbf98">&#9670;&nbsp;</a></span>getPH()</h2>
+<a id="a84e95894778ed8b488e4a29e9be29513" name="a84e95894778ed8b488e4a29e9be29513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e95894778ed8b488e4a29e9be29513">&#9670;&nbsp;</a></span>getPH()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -110,7 +118,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t RealPH::getPH </td>
+          <td class="memname">double RealPH::getPH </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -125,7 +133,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Gets the pH from the sensor. </p>
 
-<p>Implements <a class="el" href="classPH.html#a1a18694dc909732187311df4349f6c33">PH</a>.</p>
+<p>Implements <a class="el" href="classPH.html#a3a704579e9fdd336f59c990a7009e92e">PH</a>.</p>
 
 </div>
 </div>
