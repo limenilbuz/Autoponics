@@ -29,15 +29,16 @@ struct Threshold {
     double PH, EC;
 };
 
-Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
+static Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
 
 struct SystemMeasurements {
     double PH;
     double EC;
+    double Temperature;
     bool WaterLevel;
 };
 
-SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .WaterLevel = false};
+static SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .Temperature = 25.0, .WaterLevel = false};
 
 
 void pHTask(void* pvParameters) {
@@ -77,7 +78,9 @@ void ecTask(void* pvParameters) {
         auto temp = ec_source.voltageToTemp(temp_mv);
         auto ec = ec_source.voltageToEC(ec_mv, temp);
         ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius",
-                 (int)ec_mv, ec, (int)temp_mv, temp);
+                 ec_mv, ec, temp_mv, temp);
+        system_measurements.EC = ec;
+        system_measurements.Temperature = temp;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
