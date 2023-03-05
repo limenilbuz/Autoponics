@@ -29,15 +29,16 @@ struct Threshold {
     double PH, EC;
 };
 
-Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
+static Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
 
 struct SystemMeasurements {
     double PH;
     double EC;
+    double Temperature;
     bool WaterLevel;
 };
 
-SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .WaterLevel = false};
+static SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .Temperature = 25.0, .WaterLevel = false};
 
 
 void blinkTask(void* pvParameters) {
@@ -48,41 +49,6 @@ void blinkTask(void* pvParameters) {
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
-
-#if SIMULATION_MODE
-void pHTask(void* pvParameters) {
-    PHMetric* ph_metric = static_cast<PHMetric*>(pvParameters);
-
-    while (true) {
-        auto measurement = ph_metric->measure();
-        auto average = ph_metric->average();
-        ESP_LOGI("PH MEASUREMENT",
-                 "The current measurement is: %f\nThe average is: %f",
-                  measurement, average);
-
-        if (measurement > THRESHOLD.PH+0.5) 
-        {
-            ESP_LOGI("PH MEASUREMENT", "Too high!");
-            gpio_set_level(LED, 1);
-        }
-        else if (measurement < THRESHOLD.PH-0.5)
-        {
-            ESP_LOGI("PH MEASUREMENT", "Too low!");
-            gpio_set_level(LED, 1);
-        }
-        else
-        {
-            ESP_LOGI("PH MEASUREMENT", "Just right :)");
-            gpio_set_level(LED, 0);
-        }
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
-
-    }
-}
-#else
-
-#endif
-
 
 void waterLevelTask(void* pvParameters) {
     RealWaterLevel wl_source{};
@@ -106,6 +72,8 @@ void ecTask(void* pvParameters) {
         auto ec = ec_source.voltageToEC(ec_mv, temp);
         ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius",
                  ec_mv, ec, temp_mv, temp);
+        system_measurements.EC = ec;
+        system_measurements.Temperature = temp;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
