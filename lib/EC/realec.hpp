@@ -18,14 +18,14 @@ class RealEC : public EC {
     private:
     double calibration_value = 1.0;
     adc1_channel_t temp_read_pin; 
-    adc_channel_t ec_read_pin; 
+    adc1_channel_t ec_read_pin; 
     esp_adc_cal_characteristics_t adc1_chars;
 
     public:
     /** 
      * @brief Constructs the real EC data class.
     */
-    RealEC();
+    explicit RealEC(esp_adc_cal_characteristics_t adc1_chars);
 
     /**
      * @brief Returns the real EC data.
@@ -46,7 +46,12 @@ class RealEC : public EC {
     /** 
      * @brief Gets the millivolt value of the temperature pin.
     */
-   uint32_t getTempMV();
+   uint32_t getTemp_mV();
+
+    /** 
+     * @brief Gets the millivolt value of the EC pin.
+    */
+   uint32_t getEC_mV();
 
 };
 

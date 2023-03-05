@@ -3,20 +3,28 @@
 #include "esp_adc_cal.h"
 #include "pins.hpp"
 
-RealEC::RealEC() : calibration_value{1.0}, temp_read_pin{TEMPERATURE_READ_PIN} {
-    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
-    adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
+RealEC::RealEC(esp_adc_cal_characteristics_t adc1_chars) 
+: calibration_value{1.0}, temp_read_pin{TEMPERATURE_READ_PIN}, ec_read_pin{EC_READ_PIN}, adc1_chars{adc1_chars} {
     adc1_config_channel_atten(temp_read_pin, ADC_ATTEN_DB_11);
+    adc1_config_channel_atten(ec_read_pin, ADC_ATTEN_DB_11);
 }
 
 double RealEC::getEC() {
-    return 1.0;
+    auto ec_mv = getEC_mV();
+    auto temp_mv = getTemp_mV();
+    auto temp = voltageToTemp(temp_mv);
+    auto ec = voltageToEC(ec_mv, temp);
+    return ec;
 }
 
-uint32_t RealEC::getTempMV() {
-    uint32_t temp_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(temp_read_pin), &adc1_chars);
+uint32_t RealEC::getTemp_mV() {
+    uint32_t temp_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(temp_read_pin), &this->adc1_chars);
     return temp_mV;
+}
 
+uint32_t RealEC::getEC_mV() {
+    uint32_t ec_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ec_read_pin), &this->adc1_chars);
+    return ec_mV;
 }
 
 double RealEC::voltageToEC(double voltage) {
