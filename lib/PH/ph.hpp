@@ -13,7 +13,7 @@ class PH {
     /**
      * @brief Gets the pH.
     */
-    virtual uint32_t getPH() = 0;
+    virtual double getPH() = 0;
 
 };
 

@@ -41,14 +41,15 @@ SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .WaterLevel = fals
 
 
 void pHTask(void* pvParameters) {
-    PHMetric* ph_metric = static_cast<PHMetric*>(pvParameters);
+    static RealPH ph_source{adc1_chars};
+    static PHMetric ph(ph_source);
 
     while (true) {
-        auto measurement = ph_metric->measure();
-        auto average = ph_metric->average();
+        auto ph_mV = ph_source.getPH_mV();
+        auto ph = ph_source.voltageToPH(ph_mV);
         ESP_LOGI("PH MEASUREMENT",
-                 "The current measurement is: %f\nThe average is: %f",
-                  measurement, average);
+                 "%d mV\t%.2f",
+                  (int)ph_mV, ph);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
 
@@ -62,7 +63,7 @@ void waterLevelTask(void* pvParameters) {
         auto measurement = wl_source.isHigh();
         ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
         gpio_set_level(LED, measurement);
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
@@ -76,30 +77,11 @@ void ecTask(void* pvParameters) {
         auto temp = ec_source.voltageToTemp(temp_mv);
         auto ec = ec_source.voltageToEC(ec_mv, temp);
         ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius",
-                 ec_mv, ec, temp_mv, temp);
+                 (int)ec_mv, ec, (int)temp_mv, temp);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
-
-
-static esp_adc_cal_characteristics_t adc1_chars;
-void adc_task(void* pvParameters)
-{
-    uint32_t voltage;
-    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
-    ESP_ERROR_CHECK(adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT));
-    ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11));
-    while (1) 
-    {
-        voltage = esp_adc_cal_raw_to_voltage(adc1_get_raw(ADC1_CHANNEL_6), &adc1_chars);
-        ESP_LOGI("TAG", "ADC1_CHANNEL_6: %d mV", voltage);
-        vTaskDelay(pdMS_TO_TICKS(100));
-    }
-}
-static RealPH ph_source;
-
-static PHMetric ph(ph_source);
 //ECMetric ec(ec_source);
 //WaterLevelMetric wl(wl_source);
 
@@ -116,5 +98,5 @@ extern "C" void app_main(void) {
 
     //xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     //xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, &ph, TASK_PRIORITY, NULL);
+    xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }

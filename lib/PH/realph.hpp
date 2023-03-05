@@ -17,12 +17,22 @@ class RealPH : public PH {
     /**
      * @brief Constructs a RealPH object.
     */
-    RealPH();
+    explicit RealPH(esp_adc_cal_characteristics_t adc1_chars);
 
     /**
      * @brief Gets the pH from the sensor.
     */
-    uint32_t getPH() override;
+    double getPH() override;
+
+    /**
+     * @brief Converts a voltage to the pH.
+    */
+    uint32_t getPH_mV();
+
+    /**
+     * @brief Returns the real pH data.
+    */
+    double voltageToPH(uint32_t voltage);
 };
 
 
