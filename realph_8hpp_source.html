@@ -74,22 +74,27 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define REAL_PH_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;ph.hpp&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classRealPH.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classRealPH.html">RealPH</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPH.html">PH</a> {</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classRealPH.html#a45e7e54efd6bcfc30790dcb76ff908ab">   15</a></span>    <a class="code hl_function" href="classRealPH.html#a45e7e54efd6bcfc30790dcb76ff908ab">RealPH</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">getPH</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>};</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;driver/adc.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;esp_adc_cal.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classRealPH.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classRealPH.html">RealPH</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPH.html">PH</a> {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    adc1_channel_t ph_read_pin;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    esp_adc_cal_characteristics_t adc1_chars;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="classRealPH.html#afee341ccdc881602c7faf804cd50757d">RealPH</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    uint32_t <a class="code hl_function" href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">getPH</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassPH_html"><div class="ttname"><a href="classPH.html">PH</a></div><div class="ttdoc">PH source interface class. Defines one method for getting the pH.</div><div class="ttdef"><b>Definition:</b> ph.hpp:9</div></div>
-<div class="ttc" id="aclassRealPH_html"><div class="ttname"><a href="classRealPH.html">RealPH</a></div><div class="ttdoc">pH Source which interfaces with the pH sensor.</div><div class="ttdef"><b>Definition:</b> realph.hpp:9</div></div>
-<div class="ttc" id="aclassRealPH_html_a45e7e54efd6bcfc30790dcb76ff908ab"><div class="ttname"><a href="classRealPH.html#a45e7e54efd6bcfc30790dcb76ff908ab">RealPH::RealPH</a></div><div class="ttdeci">RealPH()=default</div><div class="ttdoc">Constructs a RealPH object.</div></div>
-<div class="ttc" id="aclassRealPH_html_a84e95894778ed8b488e4a29e9be29513"><div class="ttname"><a href="classRealPH.html#a84e95894778ed8b488e4a29e9be29513">RealPH::getPH</a></div><div class="ttdeci">double getPH() override</div><div class="ttdoc">Gets the pH from the sensor.</div><div class="ttdef"><b>Definition:</b> realph.cpp:3</div></div>
+<div class="ttc" id="aclassRealPH_html"><div class="ttname"><a href="classRealPH.html">RealPH</a></div><div class="ttdoc">pH Source which interfaces with the pH sensor.</div><div class="ttdef"><b>Definition:</b> realph.hpp:11</div></div>
+<div class="ttc" id="aclassRealPH_html_ae2c312a6c96f9ad42105e7b9fc2dbf98"><div class="ttname"><a href="classRealPH.html#ae2c312a6c96f9ad42105e7b9fc2dbf98">RealPH::getPH</a></div><div class="ttdeci">uint32_t getPH() override</div><div class="ttdoc">Gets the pH from the sensor.</div><div class="ttdef"><b>Definition:</b> realph.cpp:12</div></div>
+<div class="ttc" id="aclassRealPH_html_afee341ccdc881602c7faf804cd50757d"><div class="ttname"><a href="classRealPH.html#afee341ccdc881602c7faf804cd50757d">RealPH::RealPH</a></div><div class="ttdeci">RealPH()</div><div class="ttdoc">Constructs a RealPH object.</div><div class="ttdef"><b>Definition:</b> realph.cpp:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
