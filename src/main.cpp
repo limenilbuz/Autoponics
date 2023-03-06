@@ -11,7 +11,7 @@
 #include "mockph.hpp"
 #include "waterlevelmetric.hpp"
 #include "mockwaterlevel.hpp"
-#include "realwaterlevel.hpp"
+#include "dfrobot_noncontact_liquid_level.hpp"
 #include "realph.hpp"
 #include "mockec.hpp"
 #include "ecmetric.hpp"
@@ -58,7 +58,7 @@ void pHTask(void* pvParameters) {
 }
 
 void waterLevelTask(void* pvParameters) {
-    RealWaterLevel wl_source{};
+    DFRobotNonContactLiquidLevel wl_source{};
 
     while (true) {
         auto measurement = wl_source.isHigh();
