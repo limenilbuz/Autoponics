@@ -72,41 +72,40 @@ $(function() {
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;CircBuf.hpp&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;numeric&gt;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define MAX_HISTORY_SIZE 10</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classMetric.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classMetric.html">Metric</a></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>{</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_class" href="classCircBuf.html">CircBuf&lt;T&gt;</a> history;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">   24</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">addToHistory</a>(T data)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        history.<a class="code hl_function" href="classCircBuf.html#a74906ae546d0b9cddbc7f70021e36ec5">push_front</a>(data);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    }</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classMetric.html#a752345364422a7759a1cd964c386b36c">   32</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classMetric.html#a752345364422a7759a1cd964c386b36c">average</a>()</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        T total = history.<a class="code hl_function" href="classCircBuf.html#a060dd0e0506d3e52136e4d014b1db53a">accumulate</a>();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordflow">return</span> total / MAX_HISTORY_SIZE;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">   41</a></span>    T <a class="code hl_function" href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">mostRecent</a>()</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> history.<a class="code hl_function" href="classCircBuf.html#a4061445348a8877d155d0b5e8ccec9df">front</a>();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#define MAX_HISTORY_SIZE 10</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classMetric.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classMetric.html">Metric</a></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_class" href="classCircBuf.html">CircBuf&lt;T&gt;</a> history;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">   23</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">addToHistory</a>(T data)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        history.<a class="code hl_function" href="classCircBuf.html#a74906ae546d0b9cddbc7f70021e36ec5">push_front</a>(data);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    }</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classMetric.html#a752345364422a7759a1cd964c386b36c">   31</a></span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classMetric.html#a752345364422a7759a1cd964c386b36c">average</a>()</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        T total = history.<a class="code hl_function" href="classCircBuf.html#a060dd0e0506d3e52136e4d014b1db53a">accumulate</a>();</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordflow">return</span> total / MAX_HISTORY_SIZE;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    }</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">   40</a></span>    T <a class="code hl_function" href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">mostRecent</a>()</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">return</span> history.<a class="code hl_function" href="classCircBuf.html#a4061445348a8877d155d0b5e8ccec9df">front</a>();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
 <div class="ttc" id="aclassCircBuf_html"><div class="ttname"><a href="classCircBuf.html">CircBuf</a></div><div class="ttdoc">Container class for unique data structure in metric.hpp.</div><div class="ttdef"><b>Definition:</b> CircBuf.hpp:9</div></div>
 <div class="ttc" id="aclassCircBuf_html_a060dd0e0506d3e52136e4d014b1db53a"><div class="ttname"><a href="classCircBuf.html#a060dd0e0506d3e52136e4d014b1db53a">CircBuf::accumulate</a></div><div class="ttdeci">T accumulate()</div><div class="ttdoc">Returns sum of all data entries so far.</div><div class="ttdef"><b>Definition:</b> CircBuf.hpp:54</div></div>
 <div class="ttc" id="aclassCircBuf_html_a4061445348a8877d155d0b5e8ccec9df"><div class="ttname"><a href="classCircBuf.html#a4061445348a8877d155d0b5e8ccec9df">CircBuf::front</a></div><div class="ttdeci">T front()</div><div class="ttdoc">Returns most recent entry. Returns -1 if there is no current data.</div><div class="ttdef"><b>Definition:</b> CircBuf.hpp:68</div></div>
 <div class="ttc" id="aclassCircBuf_html_a74906ae546d0b9cddbc7f70021e36ec5"><div class="ttname"><a href="classCircBuf.html#a74906ae546d0b9cddbc7f70021e36ec5">CircBuf::push_front</a></div><div class="ttdeci">void push_front(T data)</div><div class="ttdoc">Adds a data point to the buffer, deleting the entry that was there, which was the oldest entry.</div><div class="ttdef"><b>Definition:</b> CircBuf.hpp:40</div></div>
-<div class="ttc" id="aclassMetric_html"><div class="ttname"><a href="classMetric.html">Metric</a></div><div class="ttdoc">Metric template class to track data over time periods.</div><div class="ttdef"><b>Definition:</b> metric.hpp:12</div></div>
-<div class="ttc" id="aclassMetric_html_a752345364422a7759a1cd964c386b36c"><div class="ttname"><a href="classMetric.html#a752345364422a7759a1cd964c386b36c">Metric::average</a></div><div class="ttdeci">double average()</div><div class="ttdoc">Returns the average of all the data points.</div><div class="ttdef"><b>Definition:</b> metric.hpp:32</div></div>
-<div class="ttc" id="aclassMetric_html_ae41ed8eb187b3a1e7f520094f9faaa53"><div class="ttname"><a href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">Metric::mostRecent</a></div><div class="ttdeci">T mostRecent()</div><div class="ttdoc">Returns the most recent data point.</div><div class="ttdef"><b>Definition:</b> metric.hpp:41</div></div>
-<div class="ttc" id="aclassMetric_html_aeafe484ee6f20167527c73b65cf7fe5f"><div class="ttname"><a href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">Metric::addToHistory</a></div><div class="ttdeci">void addToHistory(T data)</div><div class="ttdoc">Adds a data point to the history, shifting over all data if the size of history exceeds the max size.</div><div class="ttdef"><b>Definition:</b> metric.hpp:24</div></div>
+<div class="ttc" id="aclassMetric_html"><div class="ttname"><a href="classMetric.html">Metric</a></div><div class="ttdoc">Metric template class to track data over time periods.</div><div class="ttdef"><b>Definition:</b> metric.hpp:11</div></div>
+<div class="ttc" id="aclassMetric_html_a752345364422a7759a1cd964c386b36c"><div class="ttname"><a href="classMetric.html#a752345364422a7759a1cd964c386b36c">Metric::average</a></div><div class="ttdeci">double average()</div><div class="ttdoc">Returns the average of all the data points.</div><div class="ttdef"><b>Definition:</b> metric.hpp:31</div></div>
+<div class="ttc" id="aclassMetric_html_ae41ed8eb187b3a1e7f520094f9faaa53"><div class="ttname"><a href="classMetric.html#ae41ed8eb187b3a1e7f520094f9faaa53">Metric::mostRecent</a></div><div class="ttdeci">T mostRecent()</div><div class="ttdoc">Returns the most recent data point.</div><div class="ttdef"><b>Definition:</b> metric.hpp:40</div></div>
+<div class="ttc" id="aclassMetric_html_aeafe484ee6f20167527c73b65cf7fe5f"><div class="ttname"><a href="classMetric.html#aeafe484ee6f20167527c73b65cf7fe5f">Metric::addToHistory</a></div><div class="ttdeci">void addToHistory(T data)</div><div class="ttdoc">Adds a data point to the history, shifting over all data if the size of history exceeds the max size.</div><div class="ttdef"><b>Definition:</b> metric.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
