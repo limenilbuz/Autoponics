@@ -63,7 +63,7 @@ void pHTask(void* pvParameters) {
         ESP_LOGI("PH MEASUREMENT",
                  "%d mV\t%.2f",
                   (int)ph_mV, ph);
-        system_measurements.PH = ph;
+
         vTaskDelay(1000 / portTICK_PERIOD_MS);
 
     }
@@ -76,7 +76,6 @@ void waterLevelTask(void* pvParameters) {
         auto measurement = wl_source.isHigh();
         ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
         gpio_set_level(LED, measurement);
-        system_measurements.EC = measurement;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -116,7 +115,6 @@ static esp_err_t i2c_slave_init(void)
 
     return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, 256, 256, 0);
 }
-
 
 //ECMetric ec(ec_source);
 //WaterLevelMetric wl(wl_source);
