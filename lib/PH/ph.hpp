@@ -1,5 +1,4 @@
-#ifndef PH_HPP
-#define PH_HPP
+#pragma once
 
 
 /**
@@ -16,5 +15,3 @@ class PH {
     virtual double getPH() = 0;
 
 };
-
-#endif

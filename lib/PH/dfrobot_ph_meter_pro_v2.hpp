@@ -1,12 +1,12 @@
-#ifndef REAL_PH_HPP
-#define REAL_PH_HPP
+#pragma once
 
 #include "ph.hpp"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 
 /**
- * @brief pH Source which interfaces with the pH sensor.
+ * @brief Represent an interface to the DFRobot PH meter pro v2 sensor.
+ * https://www.dfrobot.com/product-2069.html
 */
 class RealPH : public PH {
     private:
@@ -15,7 +15,7 @@ class RealPH : public PH {
 
     public:
     /**
-     * @brief Constructs a RealPH object.
+     * @brief Constructs the sensor object.
     */
     explicit RealPH(esp_adc_cal_characteristics_t adc1_chars);
 
@@ -34,7 +34,3 @@ class RealPH : public PH {
     */
     double voltageToPH(uint32_t voltage);
 };
-
-
-
-#endif

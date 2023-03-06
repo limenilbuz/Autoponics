@@ -12,7 +12,7 @@
 #include "waterlevelmetric.hpp"
 #include "mockwaterlevel.hpp"
 #include "dfrobot_noncontact_liquid_level.hpp"
-#include "realph.hpp"
+#include "dfrobot_ph_meter_pro_v2.hpp"
 #include "mockec.hpp"
 #include "ecmetric.hpp"
 #include "dfrobot_ec_meter_pro.hpp"
@@ -115,9 +115,6 @@ static esp_err_t i2c_slave_init(void)
 
     return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, 256, 256, 0);
 }
-
-//ECMetric ec(ec_source);
-//WaterLevelMetric wl(wl_source);
 
 /**
  * @brief The main function. Currenlty blinker example.

@@ -1,4 +1,4 @@
-#include "realph.hpp"
+#include "dfrobot_ph_meter_pro_v2.hpp"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
 #include "pins.hpp"

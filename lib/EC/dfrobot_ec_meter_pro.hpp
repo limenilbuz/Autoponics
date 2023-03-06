@@ -1,5 +1,5 @@
-#ifndef REAL_EC_HPP
-#define REAL_EC_HPP
+#pragma once
+
 #include "ec.hpp"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
@@ -59,5 +59,3 @@ class DFRobotECMeterPro : public EC {
    uint32_t getEC_mV();
 
 };
-
-#endif
