@@ -17,11 +17,23 @@
 #include "ecmetric.hpp"
 #include "realec.hpp"
 #include "pins.hpp"
+#include "driver/i2c.h"
 
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
 #define LED GPIO_NUM_2
 #define SIMULATION_MODE 0
+
+// I2C
+#define I2C_SLAVE_ADDRESS           0x08 // Address for I2C connection
+#define I2C_SLAVE_SDA_IO            18
+#define I2C_SLAVE_SCL_IO            19
+#define I2C_SLAVE_NUM               0  
+#define I2C_SLAVE_FREQ_HZ           400000                                    
+#define I2C_SLAVE_TIMEOUT_MS        1000 
+#define DATA_LENGTH                 512
+#define I2C_SLAVE_RX_BUF_LEN        256
+#define I2C_SLAVE_TX_BUF_LEN        256
 
 static esp_adc_cal_characteristics_t adc1_chars;
 
@@ -51,7 +63,7 @@ void pHTask(void* pvParameters) {
         ESP_LOGI("PH MEASUREMENT",
                  "%d mV\t%.2f",
                   (int)ph_mV, ph);
-
+        system_measurements.PH = ph;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
 
     }
@@ -64,6 +76,7 @@ void waterLevelTask(void* pvParameters) {
         auto measurement = wl_source.isHigh();
         ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
         gpio_set_level(LED, measurement);
+        system_measurements.EC = measurement;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -85,6 +98,26 @@ void ecTask(void* pvParameters) {
     }
 }
 
+// I2C setup
+static esp_err_t i2c_slave_init(void)
+{
+    i2c_config_t conf = {
+        .mode = I2C_MODE_SLAVE,
+        .sda_io_num = I2C_SLAVE_SDA_IO, // Replace with the SDA pin number you are using
+        .scl_io_num = I2C_SLAVE_SCL_IO, // Replace with the SCL pin number you are using
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+    };
+
+    conf.slave.addr_10bit_en = 0;
+    conf.slave.slave_addr = I2C_SLAVE_ADDRESS;
+
+    i2c_param_config(I2C_SLAVE_NUM, &conf);
+
+    return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, 256, 256, 0);
+}
+
+
 //ECMetric ec(ec_source);
 //WaterLevelMetric wl(wl_source);
 
@@ -92,6 +125,11 @@ void ecTask(void* pvParameters) {
  * @brief The main function. Currenlty blinker example.
 */
 extern "C" void app_main(void) {
+
+    ESP_ERROR_CHECK(i2c_slave_init());
+    uint8_t i2c_slave_buf[DATA_LENGTH];
+    ESP_LOGI("I2C Connection", "I2C initialized successfully");
+
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
     adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
 
