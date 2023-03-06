@@ -1,22 +1,15 @@
-#ifndef EC_HPP
-#define EC_HPP
-
+#pragma once
 
 /**
  * @brief EC source interface class.
  * Defines one method for getting the EC.
-*/
-class EC {
+ */
+class EC
+{
 
-    public:
-    
+public:
     /**
      * @brief Gets the EC.
-    */
+     */
     virtual double getEC() = 0;
-
 };
-
-
-
-#endif

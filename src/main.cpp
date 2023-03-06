@@ -1,7 +1,7 @@
 /**
  * @file main.c
  * @brief Contains app_main.
-*/
+ */
 
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
@@ -25,54 +25,58 @@
 #define SIMULATION_MODE 0
 
 // I2C
-#define I2C_SLAVE_ADDRESS           0x08 // Address for I2C connection
-#define I2C_SLAVE_SDA_IO            18
-#define I2C_SLAVE_SCL_IO            19
-#define I2C_SLAVE_NUM               0  
-#define I2C_SLAVE_FREQ_HZ           400000                                    
-#define I2C_SLAVE_TIMEOUT_MS        1000 
-#define DATA_LENGTH                 512
-#define I2C_SLAVE_RX_BUF_LEN        256
-#define I2C_SLAVE_TX_BUF_LEN        256
+#define I2C_SLAVE_ADDRESS 0x08 // Address for I2C connection
+#define I2C_SLAVE_SDA_IO 18
+#define I2C_SLAVE_SCL_IO 19
+#define I2C_SLAVE_NUM 0
+#define I2C_SLAVE_FREQ_HZ 400000
+#define I2C_SLAVE_TIMEOUT_MS 1000
+#define DATA_LENGTH 512
+#define I2C_SLAVE_RX_BUF_LEN 256
+#define I2C_SLAVE_TX_BUF_LEN 256
 
 static esp_adc_cal_characteristics_t adc1_chars;
 
-struct Threshold {
+struct Threshold
+{
     double PH, EC;
 };
 
-static Threshold THRESHOLD {.PH = 6.0, .EC = 2.0};
+static Threshold THRESHOLD{.PH = 6.0, .EC = 2.0};
 
-struct SystemMeasurements {
+struct SystemMeasurements
+{
     double PH;
     double EC;
     double Temperature;
     bool WaterLevel;
 };
 
-static SystemMeasurements system_measurements {.PH = 0.0, .EC = 0.0, .Temperature = 25.0, .WaterLevel = false};
+static SystemMeasurements system_measurements{.PH = 0.0, .EC = 0.0, .Temperature = 25.0, .WaterLevel = false};
 
-
-void pHTask(void* pvParameters) {
+void pHTask(void *pvParameters)
+{
     static RealPH ph_source{adc1_chars};
     static PHMetric ph(ph_source);
 
-    while (true) {
+    while (true)
+    {
         auto ph_mV = ph_source.getPH_mV();
         auto ph = ph_source.voltageToPH(ph_mV);
         ESP_LOGI("PH MEASUREMENT",
                  "%d mV\t%.2f",
-                  (int)ph_mV, ph);
+                 (int)ph_mV, ph);
 
         vTaskDelay(1000 / portTICK_PERIOD_MS);
-
     }
 }
 
-void waterLevelTask(void* pvParameters) {
+void waterLevelTask(void *pvParameters)
+{
     DFRobotNonContactLiquidLevel wl_source{};
 
-    while (true) {
+    while (true)
+    {
         auto measurement = wl_source.isHigh();
         ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
         gpio_set_level(LED, measurement);
@@ -80,11 +84,13 @@ void waterLevelTask(void* pvParameters) {
     }
 }
 
-void ecTask(void* pvParameters) {
-    
+void ecTask(void *pvParameters)
+{
+
     static DFRobotECMeterPro ec_source{adc1_chars};
 
-    while (true) {
+    while (true)
+    {
         auto ec_mv = ec_source.getEC_mV();
         auto temp_mv = ec_source.getTemp_mV();
         auto temp = ec_source.voltageToTemp(temp_mv);
@@ -118,8 +124,9 @@ static esp_err_t i2c_slave_init(void)
 
 /**
  * @brief The main function. Currenlty blinker example.
-*/
-extern "C" void app_main(void) {
+ */
+extern "C" void app_main(void)
+{
 
     ESP_ERROR_CHECK(i2c_slave_init());
     uint8_t i2c_slave_buf[DATA_LENGTH];
@@ -130,9 +137,9 @@ extern "C" void app_main(void) {
 
     gpio_reset_pin(LED);
     gpio_set_direction(LED, GPIO_MODE_OUTPUT);
-    char* taskName = pcTaskGetName(NULL);
+    char *taskName = pcTaskGetName(NULL);
 
-    //xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    //xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    // xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    // xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }
