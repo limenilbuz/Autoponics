@@ -70,36 +70,37 @@ $(function() {
   <div class="headertitle"><div class="title">ecmetric.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef EC_METRIC_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define EC_METRIC_HPP</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;ec.hpp&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;metric.hpp&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classECMetric.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classECMetric.html">ECMetric</a> : <span class="keyword">public</span> <a class="code hl_class" href="classMetric.html">Metric</a>&lt;double&gt; {  </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="classEC.html">EC</a>&amp; ec_source;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">   23</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a> {Hanna, Eutech, Truncheon};</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">   29</a></span>    <a class="code hl_function" href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">ECMetric</a>(<a class="code hl_class" href="classEC.html">EC</a>&amp; source) : ec_source{source} {}</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classECMetric.html#ae1946b44f2f7e38fd795d2d4415a1237">measure</a>();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">toPPM</a>(<span class="keywordtype">double</span> ec_measurement, <a class="code hl_enumeration" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a> conversion_factor = PPMConversion::Hanna);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>};</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassECMetric_html"><div class="ttname"><a href="classECMetric.html">ECMetric</a></div><div class="ttdoc">EC Metric class that returns the EC reading from a EC source class object.</div><div class="ttdef"><b>Definition:</b> ecmetric.hpp:11</div></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;ec.hpp&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;metric.hpp&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classECMetric.html">    9</a></span><span class="keyword">class </span><a class="code hl_class" href="classECMetric.html">ECMetric</a> : <span class="keyword">public</span> <a class="code hl_class" href="classMetric.html">Metric</a>&lt;double&gt;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>{</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classEC.html">EC</a> &amp;ec_source;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">   22</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        Hanna,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        Eutech,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        Truncheon</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">   33</a></span>    <a class="code hl_function" href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">ECMetric</a>(<a class="code hl_class" href="classEC.html">EC</a> &amp;source) : ec_source{source} {}</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classECMetric.html#ae1946b44f2f7e38fd795d2d4415a1237">measure</a>();</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">toPPM</a>(<span class="keywordtype">double</span> ec_measurement, <a class="code hl_enumeration" href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">PPMConversion</a> conversion_factor = PPMConversion::Hanna);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="ttc" id="aclassECMetric_html"><div class="ttname"><a href="classECMetric.html">ECMetric</a></div><div class="ttdoc">EC Metric class that returns the EC reading from a EC source class object.</div><div class="ttdef"><b>Definition:</b> ecmetric.hpp:10</div></div>
 <div class="ttc" id="aclassECMetric_html_a0e8531ca23090e5159911a7a86b65ea0"><div class="ttname"><a href="classECMetric.html#a0e8531ca23090e5159911a7a86b65ea0">ECMetric::PPMConversion</a></div><div class="ttdeci">PPMConversion</div><div class="ttdoc">PPM conversion enum type. Names the common conversions from EC to PPM.</div><div class="ttdef"><b>Definition:</b> ecmetric.hpp:23</div></div>
-<div class="ttc" id="aclassECMetric_html_a415ecb9dbcd54e3497ea691e70b5a0d0"><div class="ttname"><a href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">ECMetric::ECMetric</a></div><div class="ttdeci">ECMetric(EC &amp;source)</div><div class="ttdoc">Constructs a ECMetric class object.</div><div class="ttdef"><b>Definition:</b> ecmetric.hpp:29</div></div>
+<div class="ttc" id="aclassECMetric_html_a415ecb9dbcd54e3497ea691e70b5a0d0"><div class="ttname"><a href="classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0">ECMetric::ECMetric</a></div><div class="ttdeci">ECMetric(EC &amp;source)</div><div class="ttdoc">Constructs a ECMetric class object.</div><div class="ttdef"><b>Definition:</b> ecmetric.hpp:33</div></div>
 <div class="ttc" id="aclassECMetric_html_a4bf261df3a0f1bf9ddb505cd728695db"><div class="ttname"><a href="classECMetric.html#a4bf261df3a0f1bf9ddb505cd728695db">ECMetric::toPPM</a></div><div class="ttdeci">int toPPM(double ec_measurement, PPMConversion conversion_factor=PPMConversion::Hanna)</div><div class="ttdoc">Converts an EC measurement to PPM using one of the standard conversion factors. See https://reefertil...</div><div class="ttdef"><b>Definition:</b> ecmetric.cpp:9</div></div>
 <div class="ttc" id="aclassECMetric_html_ae1946b44f2f7e38fd795d2d4415a1237"><div class="ttname"><a href="classECMetric.html#ae1946b44f2f7e38fd795d2d4415a1237">ECMetric::measure</a></div><div class="ttdeci">double measure()</div><div class="ttdoc">Returns the measured EC from the source.</div><div class="ttdef"><b>Definition:</b> ecmetric.cpp:3</div></div>
-<div class="ttc" id="aclassEC_html"><div class="ttname"><a href="classEC.html">EC</a></div><div class="ttdoc">EC source interface class. Defines one method for getting the EC.</div><div class="ttdef"><b>Definition:</b> ec.hpp:9</div></div>
-<div class="ttc" id="aclassMetric_html"><div class="ttname"><a href="classMetric.html">Metric</a></div><div class="ttdoc">Metric template class to track data over time periods.</div><div class="ttdef"><b>Definition:</b> metric.hpp:11</div></div>
+<div class="ttc" id="aclassEC_html"><div class="ttname"><a href="classEC.html">EC</a></div><div class="ttdoc">EC source interface class. Defines one method for getting the EC.</div><div class="ttdef"><b>Definition:</b> ec.hpp:8</div></div>
+<div class="ttc" id="aclassMetric_html"><div class="ttname"><a href="classMetric.html">Metric</a></div><div class="ttdoc">Metric template class to track data over time periods.</div><div class="ttdef"><b>Definition:</b> metric.hpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

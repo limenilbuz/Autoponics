@@ -70,30 +70,32 @@ $(function() {
   <div class="headertitle"><div class="title">pump.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;freertos/task.h&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;driver/gpio.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using </span>milliliter = int;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="classPump.html">   11</a></span><span class="keyword">class </span><a class="code hl_class" href="classPump.html">Pump</a> {</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> multiplier;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    gpio_num_t relay_control_pin;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_function" href="classPump.html#a1588059f83afb8f8bd14c6de400f1d59">Pump</a>(<span class="keywordtype">int</span> flow_rate_multiplier, gpio_num_t relay_pin);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPump.html#adf416762fd103c5fd175f00643ca33f0">activate</a>(milliliter volume);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPump.html#a617e5055d1a59a4db23b02435ef3002a">calibrate</a>();</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
-<div class="ttc" id="aclassPump_html"><div class="ttname"><a href="classPump.html">Pump</a></div><div class="ttdoc">Pump class. Simple interface for working with the DC motor peristaltic pump.</div><div class="ttdef"><b>Definition:</b> pump.hpp:11</div></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;esp_log.h&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;freertos/FreeRTOS.h&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;freertos/task.h&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;driver/gpio.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">using </span>milliliter = int;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classPump.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="classPump.html">Pump</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">int</span> multiplier;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    gpio_num_t relay_control_pin;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_function" href="classPump.html#a1588059f83afb8f8bd14c6de400f1d59">Pump</a>(<span class="keywordtype">int</span> flow_rate_multiplier, gpio_num_t relay_pin);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPump.html#adf416762fd103c5fd175f00643ca33f0">activate</a>(milliliter volume);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPump.html#a617e5055d1a59a4db23b02435ef3002a">calibrate</a>();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>};</div>
+<div class="ttc" id="aclassPump_html"><div class="ttname"><a href="classPump.html">Pump</a></div><div class="ttdoc">Pump class. Simple interface for working with the DC motor peristaltic pump.</div><div class="ttdef"><b>Definition:</b> pump.hpp:13</div></div>
 <div class="ttc" id="aclassPump_html_a1588059f83afb8f8bd14c6de400f1d59"><div class="ttname"><a href="classPump.html#a1588059f83afb8f8bd14c6de400f1d59">Pump::Pump</a></div><div class="ttdeci">Pump(int flow_rate_multiplier, gpio_num_t relay_pin)</div><div class="ttdoc">Constructs the pump object.</div><div class="ttdef"><b>Definition:</b> pump.cpp:3</div></div>
-<div class="ttc" id="aclassPump_html_a617e5055d1a59a4db23b02435ef3002a"><div class="ttname"><a href="classPump.html#a617e5055d1a59a4db23b02435ef3002a">Pump::calibrate</a></div><div class="ttdeci">void calibrate()</div><div class="ttdoc">Turns on the pump for exactly 5 seconds. Use this method with a volume measuring tool to determine th...</div><div class="ttdef"><b>Definition:</b> pump.cpp:18</div></div>
-<div class="ttc" id="aclassPump_html_adf416762fd103c5fd175f00643ca33f0"><div class="ttname"><a href="classPump.html#adf416762fd103c5fd175f00643ca33f0">Pump::activate</a></div><div class="ttdeci">void activate(milliliter volume)</div><div class="ttdoc">Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter.</div><div class="ttdef"><b>Definition:</b> pump.cpp:9</div></div>
+<div class="ttc" id="aclassPump_html_a617e5055d1a59a4db23b02435ef3002a"><div class="ttname"><a href="classPump.html#a617e5055d1a59a4db23b02435ef3002a">Pump::calibrate</a></div><div class="ttdeci">void calibrate()</div><div class="ttdoc">Turns on the pump for exactly 5 seconds. Use this method with a volume measuring tool to determine th...</div><div class="ttdef"><b>Definition:</b> pump.cpp:20</div></div>
+<div class="ttc" id="aclassPump_html_adf416762fd103c5fd175f00643ca33f0"><div class="ttname"><a href="classPump.html#adf416762fd103c5fd175f00643ca33f0">Pump::activate</a></div><div class="ttdeci">void activate(milliliter volume)</div><div class="ttdoc">Turns on the pump. The time that the pump runs depends on the volume passed in as a parameter.</div><div class="ttdef"><b>Definition:</b> pump.cpp:10</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

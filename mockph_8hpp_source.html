@@ -70,24 +70,22 @@ $(function() {
   <div class="headertitle"><div class="title">mockph.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef MOCK_PH_HPP</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define MOCK_PH_HPP</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;ph.hpp&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classMockPH.html">    8</a></span><span class="keyword">class </span><a class="code hl_class" href="classMockPH.html">MockPH</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPH.html">PH</a> {</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">public</span>:</div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;ph.hpp&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classMockPH.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classMockPH.html">MockPH</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPH.html">PH</a></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">double</span> mock_ph_data;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classMockPH.html#a650b3cedb863340185aea6f7f9a001bb">   19</a></span>    <a class="code hl_function" href="classMockPH.html#a650b3cedb863340185aea6f7f9a001bb">MockPH</a>(<span class="keywordtype">double</span> mock_ph_data) : mock_ph_data{mock_ph_data} {    }</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classMockPH.html#a650b3cedb863340185aea6f7f9a001bb">   19</a></span>    <a class="code hl_function" href="classMockPH.html#a650b3cedb863340185aea6f7f9a001bb">MockPH</a>(<span class="keywordtype">double</span> mock_ph_data) : mock_ph_data{mock_ph_data} {}</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordtype">double</span> <a class="code hl_function" href="classMockPH.html#ada3b1b468b06b6f2278169b1d8103752">getPH</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassMockPH_html"><div class="ttname"><a href="classMockPH.html">MockPH</a></div><div class="ttdoc">Mock pH source which inherits from the PH interface.</div><div class="ttdef"><b>Definition:</b> mockph.hpp:8</div></div>
 <div class="ttc" id="aclassMockPH_html_a650b3cedb863340185aea6f7f9a001bb"><div class="ttname"><a href="classMockPH.html#a650b3cedb863340185aea6f7f9a001bb">MockPH::MockPH</a></div><div class="ttdeci">MockPH(double mock_ph_data)</div><div class="ttdoc">Constructs the mock pH data class.</div><div class="ttdef"><b>Definition:</b> mockph.hpp:19</div></div>
 <div class="ttc" id="aclassMockPH_html_ada3b1b468b06b6f2278169b1d8103752"><div class="ttname"><a href="classMockPH.html#ada3b1b468b06b6f2278169b1d8103752">MockPH::getPH</a></div><div class="ttdeci">double getPH() override</div><div class="ttdoc">Returns the mock pH data plus or minus 2.</div><div class="ttdef"><b>Definition:</b> mockph.cpp:4</div></div>
-<div class="ttc" id="aclassPH_html"><div class="ttname"><a href="classPH.html">PH</a></div><div class="ttdoc">PH source interface class. Defines one method for getting the pH.</div><div class="ttdef"><b>Definition:</b> ph.hpp:9</div></div>
+<div class="ttc" id="aclassPH_html"><div class="ttname"><a href="classPH.html">PH</a></div><div class="ttdoc">PH source interface class. Defines one method for getting the pH.</div><div class="ttdef"><b>Definition:</b> ph.hpp:8</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
