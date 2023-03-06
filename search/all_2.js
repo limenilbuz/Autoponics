@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ec_0',['EC',['../classEC.html',1,'']]],
-  ['ecmetric_1',['ECMetric',['../classECMetric.html',1,'ECMetric'],['../classECMetric.html#a415ecb9dbcd54e3497ea691e70b5a0d0',1,'ECMetric::ECMetric()']]]
+  ['dfrobotecmeterpro_0',['DFRobotECMeterPro',['../classDFRobotECMeterPro.html',1,'DFRobotECMeterPro'],['../classDFRobotECMeterPro.html#a3ee7d9f05b3c1666d194ee51bf69e5a8',1,'DFRobotECMeterPro::DFRobotECMeterPro()']]]
 ];
