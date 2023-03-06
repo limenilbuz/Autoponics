@@ -12,9 +12,10 @@
 #define I  (1.24 / 10000)
 
 /** 
- * @brief Real EC source which inherits from the EC interface.
+ * @brief Represent an interface to the DFRobot EC Meter Pro sensor.
+ * https://www.dfrobot.com/product-2565.html
 */
-class RealEC : public EC {
+class DFRobotECMeterPro : public EC {
     private:
     double calibration_value = 1.0;
     adc1_channel_t temp_read_pin; 
@@ -23,12 +24,12 @@ class RealEC : public EC {
 
     public:
     /** 
-     * @brief Constructs the real EC data class.
+     * @brief Constructs the sensor object.
     */
-    explicit RealEC(esp_adc_cal_characteristics_t adc1_chars);
+    explicit DFRobotECMeterPro(esp_adc_cal_characteristics_t adc1_chars);
 
     /**
-     * @brief Returns the real EC data.
+     * @brief Returns the EC value from the sensor.
     */
     double getEC() override;
 
@@ -36,6 +37,10 @@ class RealEC : public EC {
      * @brief Converts a voltage to the EC in us/cm.
     */
     double voltageToEC(double voltage);
+
+    /**
+     * @brief Converts a voltage to EC in us/cm depending on the temperature.
+    */
     double voltageToEC(double voltage, double temperature);
     
     /**

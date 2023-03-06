@@ -15,7 +15,7 @@
 #include "realph.hpp"
 #include "mockec.hpp"
 #include "ecmetric.hpp"
-#include "realec.hpp"
+#include "dfrobot_ec_meter_pro.hpp"
 #include "pins.hpp"
 
 #define TASK_STACK_SIZE 4096
@@ -70,7 +70,7 @@ void waterLevelTask(void* pvParameters) {
 
 void ecTask(void* pvParameters) {
     
-    static RealEC ec_source{adc1_chars};
+    static DFRobotECMeterPro ec_source{adc1_chars};
 
     while (true) {
         auto ec_mv = ec_source.getEC_mV();
