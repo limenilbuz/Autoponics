@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['threshold_0',['Threshold',['../structThreshold.html',1,'']]]
+  ['waterlevel_0',['WaterLevel',['../classWaterLevel.html',1,'']]],
+  ['waterlevelmetric_1',['WaterLevelMetric',['../classWaterLevelMetric.html',1,'']]]
 ];
