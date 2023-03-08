@@ -40,9 +40,10 @@ static esp_adc_cal_characteristics_t adc1_chars;
 struct Threshold
 {
     double PH, EC;
+    bool PUMP;
 };
 
-static Threshold THRESHOLD{.PH = 6.0, .EC = 2.0};
+static Threshold THRESHOLD{.PH = 6.0, .EC = 2.0, .PUMP = false};
 
 struct SystemMeasurements
 {
@@ -119,7 +120,22 @@ static esp_err_t i2c_slave_init(void)
 
     i2c_param_config(I2C_SLAVE_NUM, &conf);
 
-    return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, 256, 256, 0);
+    return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, I2C_SLAVE_RX_BUF_LEN, I2C_SLAVE_TX_BUF_LEN, 0);
+}
+
+// Reading Threshold from the screen through I2C
+void I2CRead(void *pvParameters)
+{
+    while (true)
+    {
+        i2c_slave_read_buffer(I2C_SLAVE_NUM, (uint8_t*)&THRESHOLD, I2C_SLAVE_RX_BUF_LEN, 100 / portTICK_PERIOD_MS);
+        i2c_reset_rx_fifo(I2C_SLAVE_NUM);
+
+        ESP_LOGI("PH", "THRESHOLD PH: %.2f", THRESHOLD.PH);
+        ESP_LOGI("EC", "THRESHOLD EC: %.2f", THRESHOLD.EC);
+        ESP_LOGI("PUMP", "THRESHOLD PUMP: %d", THRESHOLD.PUMP);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
 }
 
 /**
@@ -142,4 +158,5 @@ extern "C" void app_main(void)
     // xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     // xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CRead, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }
