@@ -29,9 +29,8 @@
 #define I2C_SLAVE_SDA_IO 18
 #define I2C_SLAVE_SCL_IO 19
 #define I2C_SLAVE_NUM 0
-#define I2C_SLAVE_FREQ_HZ 400000
+#define I2C_SLAVE_FREQ_HZ 1000000
 #define I2C_SLAVE_TIMEOUT_MS 1000
-#define DATA_LENGTH 512
 #define I2C_SLAVE_RX_BUF_LEN 256
 #define I2C_SLAVE_TX_BUF_LEN 256
 
@@ -109,8 +108,8 @@ static esp_err_t i2c_slave_init(void)
 {
     i2c_config_t conf = {
         .mode = I2C_MODE_SLAVE,
-        .sda_io_num = I2C_SLAVE_SDA_IO, // Replace with the SDA pin number you are using
-        .scl_io_num = I2C_SLAVE_SCL_IO, // Replace with the SCL pin number you are using
+        .sda_io_num = I2C_SLAVE_SDA_IO,
+        .scl_io_num = I2C_SLAVE_SCL_IO,
         .sda_pullup_en = GPIO_PULLUP_ENABLE,
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
     };
@@ -124,7 +123,7 @@ static esp_err_t i2c_slave_init(void)
 }
 
 // Reading Threshold from the screen through I2C
-void I2CRead(void *pvParameters)
+void I2CReadTask(void *pvParameters)
 {
     while (true)
     {
@@ -138,6 +137,42 @@ void I2CRead(void *pvParameters)
     }
 }
 
+// Writing system seasurements to the screen through I2C
+void I2CWriteTask(void *pvParameters)
+{
+    while (true)
+    {
+        /* Random value test
+        system_measurements.PH = system_measurements.PH + ((double)(rand() % 2) / 100) - ((double)(rand() % 2) / 100);
+        if (system_measurements.PH > THRESHOLD.PH + 0.05 && THRESHOLD.PUMP){
+            system_measurements.PH = system_measurements.PH - ((double)(rand() % 15) / 100);
+        }
+        else if (system_measurements.PH < THRESHOLD.PH - 0.05 && THRESHOLD.PUMP){
+            system_measurements.PH = system_measurements.PH + ((double)(rand() % 15) / 100);
+        }
+
+        system_measurements.EC = system_measurements.EC - ((double)(rand() % 2) / 100);
+        if (system_measurements.EC < THRESHOLD.EC && THRESHOLD.PUMP){
+            system_measurements.EC = system_measurements.EC + ((double)(rand() % 20) / 100);
+        }
+        if (system_measurements.EC < 0){
+            system_measurements.EC = 0;
+        }
+
+        system_measurements.Temperature = 60 + ((double)(rand() % 500) / 100);
+        
+        double wl_threshold = rand() % 100;
+        system_measurements.WaterLevel = false;
+        if (wl_threshold > 10){
+            system_measurements.WaterLevel = true;
+            
+        }
+        */
+        i2c_slave_write_buffer(I2C_SLAVE_NUM, (uint8_t*)&system_measurements, sizeof(system_measurements), 100 / portTICK_PERIOD_MS);
+        vTaskDelay(500 / portTICK_PERIOD_MS);
+    }
+}
+
 /**
  * @brief The main function. Currenlty blinker example.
  */
@@ -145,7 +180,6 @@ extern "C" void app_main(void)
 {
 
     ESP_ERROR_CHECK(i2c_slave_init());
-    uint8_t i2c_slave_buf[DATA_LENGTH];
     ESP_LOGI("I2C Connection", "I2C initialized successfully");
 
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
@@ -158,5 +192,6 @@ extern "C" void app_main(void)
     // xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     // xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(I2CRead, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CReadTask, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }
