@@ -57,7 +57,7 @@ static SystemMeasurements system_measurements{.PH = 0.0, .EC = 0.0, .Temperature
 
 void pHTask(void *pvParameters)
 {
-    static RealPH ph_source{adc1_chars};
+    static DFRobotPHMeterProV2 ph_source{adc1_chars};
     static PHMetric ph(ph_source);
 
     while (true)

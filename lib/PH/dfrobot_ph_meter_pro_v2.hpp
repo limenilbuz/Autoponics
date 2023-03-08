@@ -8,7 +8,7 @@
  * @brief Represent an interface to the DFRobot PH meter pro v2 sensor.
  * https://www.dfrobot.com/product-2069.html
  */
-class RealPH : public PH
+class DFRobotPHMeterProV2 : public PH
 {
 private:
     adc1_channel_t ph_read_pin;
@@ -18,7 +18,7 @@ public:
     /**
      * @brief Constructs the sensor object.
      */
-    explicit RealPH(esp_adc_cal_characteristics_t adc1_chars);
+    explicit DFRobotPHMeterProV2(esp_adc_cal_characteristics_t adc1_chars);
 
     /**
      * @brief Gets the pH from the sensor.
