@@ -31,10 +31,10 @@ double DFRobotPHMeterProV2::voltageToPH(uint32_t voltage)
 
 double voltageToPH(uint32_t voltage, double temperature) {
     // https://images.hach.com/asset-get.download.jsa?id=17525673904
-    #define 25_CELSIUS 25
+    #define CELSIUS_25 25
     #define NORMALIZATION_VALUE 273.15   
     double slope_at_25C = (7.0 - 4.0) / ((1500.0 - 1500.0) / 3.0 - (2032.44 - 1500.0) / 3.0);
-    double slope_normalized = slope_at_25C * ((temperature + NORMALIZATION_VALUE) / (25_CELSIUS + NORMALIZATION_VALUE));
+    double slope_normalized = slope_at_25C * ((temperature + NORMALIZATION_VALUE) / (CELSIUS_25 + NORMALIZATION_VALUE));
     double value = 7 - (voltage / slope_normalized);
     return value;
 }
