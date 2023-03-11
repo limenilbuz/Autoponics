@@ -96,8 +96,9 @@ void ecTask(void *pvParameters)
         auto temp_mv = ec_source.getTemp_mV();
         auto temp = ec_source.voltageToTemp(temp_mv);
         auto ec = ec_source.voltageToEC(ec_mv, temp);
-        ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius",
-                 ec_mv, ec, temp_mv, temp);
+        auto k = RES2*ECREF*1278/100000.0/ec_mv;
+        ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius | %.2f Kvalue",
+                 int(ec_mv), ec, int(temp_mv), temp, k);
         system_measurements.EC = ec;
         system_measurements.Temperature = temp;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -258,4 +259,9 @@ extern "C" void app_main(void)
     xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     //xTaskCreate(pumpTask, "Pump array task", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
     //xTaskCreate(relayTest, "asdf", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    // xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    //xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    //xTaskCreate(I2CReadTask, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    //xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
 }
