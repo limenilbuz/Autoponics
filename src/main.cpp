@@ -248,20 +248,10 @@ extern "C" void app_main(void)
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
     adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
 
-    gpio_reset_pin(LED);
-    gpio_set_direction(LED, GPIO_MODE_OUTPUT);
-    char *taskName = pcTaskGetName(NULL);
-
     xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(I2CReadTask, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    //xTaskCreate(pumpTask, "Pump array task", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
-    //xTaskCreate(relayTest, "asdf", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    // xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    //xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    //xTaskCreate(I2CReadTask, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    //xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(pumpTask, "Pump array task", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
 }
