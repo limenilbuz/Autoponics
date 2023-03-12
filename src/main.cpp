@@ -126,25 +126,6 @@ void pumpTask(void *pvParameters)
     }
 }
 
-// I2C setup
-static esp_err_t i2c_slave_init(void)
-{
-    i2c_config_t conf = {
-        .mode = I2C_MODE_SLAVE,
-        .sda_io_num = I2C_SLAVE_SDA_IO,
-        .scl_io_num = I2C_SLAVE_SCL_IO,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-    };
-
-    conf.slave.addr_10bit_en = 0;
-    conf.slave.slave_addr = I2C_SLAVE_ADDRESS;
-
-    i2c_param_config(I2C_SLAVE_NUM, &conf);
-
-    return i2c_driver_install(I2C_SLAVE_NUM, conf.mode, I2C_SLAVE_RX_BUF_LEN, I2C_SLAVE_TX_BUF_LEN, 0);
-}
-
 // Reading Threshold from the screen through I2C
 void I2CReadTask(void *pvParameters)
 {
@@ -173,16 +154,16 @@ void I2CWriteTask(void *pvParameters)
 
 extern "C" void app_main(void)
 {
-    ESP_ERROR_CHECK(i2c_slave_init());
+    ESP_ERROR_CHECK(i2c_slave_init()); // lib/Config/i2c_slave_config.hpp
     ESP_LOGI("I2C Connection", "I2C initialized successfully");
 
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
     adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
 
-    xTaskCreate(ecTask, "ecTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(ecTask,         "ecTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(waterLevelTask, "waterLevelTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask, "pHTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(I2CReadTask, "I2CReadTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(I2CWriteTask, "I2CWriteTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pumpTask, "pumpTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
+    xTaskCreate(pHTask,         "pHTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CReadTask,    "I2CReadTask",    TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CWriteTask,   "I2CWriteTask",   TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(pumpTask,       "pumpTask",       TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
 }
