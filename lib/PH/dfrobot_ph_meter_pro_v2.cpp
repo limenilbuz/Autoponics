@@ -17,8 +17,17 @@ double DFRobotPHMeterProV2::getPH()
 
 uint32_t DFRobotPHMeterProV2::getPH_mV()
 {
+    #if MULTISAMPLING_MODE
+    uint32_t ph_mV = 0;
+    for (int i = 0; i < MULTISAMPLING_NUM_SAMPLES; ++i) {
+        ph_mV += esp_adc_cal_raw_to_voltage(adc1_get_raw(ph_read_pin), &this->adc1_chars);
+        vTaskDelay(MULTISAMPLING_WAIT_TIME); // block for 1ms after each read to not overload the adc
+    }
+    return ph_mV / MULTISAMPLING_NUM_SAMPLES;
+    #else
     uint32_t ph_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ph_read_pin), &this->adc1_chars);
     return ph_mV;
+    #endif
 }
 
 double DFRobotPHMeterProV2::voltageToPH(uint32_t voltage)

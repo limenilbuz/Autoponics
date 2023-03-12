@@ -18,13 +18,31 @@ double DFRobotECMeterPro::getEC() {
 }
 
 uint32_t DFRobotECMeterPro::getTemp_mV() {
+    #if MULTISAMPLING_MODE
+    uint32_t temp_mV = 0;
+    for (int i = 0; i < MULTISAMPLING_NUM_SAMPLES; ++i) {
+        temp_mV += esp_adc_cal_raw_to_voltage(adc1_get_raw(temp_read_pin), &this->adc1_chars);
+        vTaskDelay(MULTISAMPLING_WAIT_TIME); // block for 1ms after each read to not overload the adc
+    }
+    return temp_mV / MULTISAMPLING_NUM_SAMPLES;
+    #else
     uint32_t temp_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(temp_read_pin), &this->adc1_chars);
     return temp_mV;
+    #endif
 }
 
 uint32_t DFRobotECMeterPro::getEC_mV() {
+    #if MULTISAMPLING_MODE
+    uint32_t ec_mV = 0;
+    for (int i = 0; i < MULTISAMPLING_NUM_SAMPLES; ++i) {
+        ec_mV += esp_adc_cal_raw_to_voltage(adc1_get_raw(ec_read_pin), &this->adc1_chars);
+        vTaskDelay(MULTISAMPLING_WAIT_TIME); // block for 1ms after each read to not overload the adc
+    }
+    return ec_mV / MULTISAMPLING_NUM_SAMPLES;
+    #else
     uint32_t ec_mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ec_read_pin), &this->adc1_chars);
     return ec_mV;
+    #endif
 }
 
 double DFRobotECMeterPro::voltageToEC(double voltage) {
