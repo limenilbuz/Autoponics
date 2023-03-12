@@ -1,6 +1,7 @@
 var NAVTREEINDEX0 =
 {
 "CircBuf_8hpp_source.html":[1,0,0,0,0],
+"all__includes_8hpp_source.html":[1,0,0,1,0],
 "annotated.html":[0,0],
 "classCircBuf.html":[0,0,0],
 "classCircBuf.html#a060dd0e0506d3e52136e4d014b1db53a":[0,0,0,0],
@@ -77,7 +78,7 @@ var NAVTREEINDEX0 =
 "functions_enum.html":[0,3,2],
 "functions_func.html":[0,3,1],
 "hierarchy.html":[0,2],
-"i2c__slave__config_8hpp_source.html":[1,0,0,1,0],
+"i2c__slave__config_8hpp_source.html":[1,0,0,1,1],
 "index.html":[],
 "metric_8hpp_source.html":[1,0,0,3,0],
 "mockec_8hpp_source.html":[1,0,0,2,3],
@@ -86,7 +87,7 @@ var NAVTREEINDEX0 =
 "pages.html":[],
 "ph_8hpp_source.html":[1,0,0,4,2],
 "phmetric_8hpp_source.html":[1,0,0,4,3],
-"pins_8hpp_source.html":[1,0,0,1,1],
+"pins_8hpp_source.html":[1,0,0,1,2],
 "pump_8hpp_source.html":[1,0,0,5,0],
 "structSystemMeasurements.html":[0,0,13],
 "structThreshold.html":[0,0,14],
