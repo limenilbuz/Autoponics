@@ -13,6 +13,8 @@ class DFRobotPHMeterProV2 : public PH
 private:
     adc1_channel_t ph_read_pin;
     esp_adc_cal_characteristics_t adc1_chars;
+    int neutral_ph_mv = 1185; // THESE TWO VALUES HAVE TO BE TESTED WITH KNOWN PH SOLUTION
+    int acidic_ph_mv = 2032.44; // FOR NEUTRAL, FIND THE mV AT PH 7, FOR ACIDIC, FIND THE mV AT PH 4
 
 public:
     /**

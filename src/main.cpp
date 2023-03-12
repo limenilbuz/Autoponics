@@ -19,21 +19,10 @@
 #include "pins.hpp"
 #include "driver/i2c.h"
 #include "pump.hpp"
+#include "i2c_slave_config.hpp"
 
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
-#define LED GPIO_NUM_2
-#define SIMULATION_MODE 0
-
-// I2C
-#define I2C_SLAVE_ADDRESS 0x08 // Address for I2C connection
-#define I2C_SLAVE_SDA_IO 18
-#define I2C_SLAVE_SCL_IO 19
-#define I2C_SLAVE_NUM 0
-#define I2C_SLAVE_FREQ_HZ 1000000
-#define I2C_SLAVE_TIMEOUT_MS 1000
-#define I2C_SLAVE_RX_BUF_LEN 256
-#define I2C_SLAVE_TX_BUF_LEN 256
 
 static esp_adc_cal_characteristics_t adc1_chars;
 
@@ -67,7 +56,7 @@ void pHTask(void *pvParameters)
         ESP_LOGI("PH MEASUREMENT",
                  "%d mV\t%.2f",
                  (int)ph_mV, ph);
-
+        system_measurements.PH = ph;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -80,7 +69,7 @@ void waterLevelTask(void *pvParameters)
     {
         auto measurement = wl_source.isHigh();
         ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
-        gpio_set_level(LED, measurement);
+        system_measurements.WaterLevel = measurement;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -99,7 +88,7 @@ void ecTask(void *pvParameters)
         auto k = RES2*ECREF*1278/100000.0/ec_mv;
         ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius | %.2f Kvalue",
                  int(ec_mv), ec, int(temp_mv), temp, k);
-        system_measurements.EC = ec;
+        system_measurements.EC = ec / 1000;
         system_measurements.Temperature = temp;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -127,7 +116,7 @@ void pumpTask(void *pvParameters)
 
         if (!THRESHOLD.PUMP)
         {
-            vTaskDelay(10000 / portTICK_PERIOD_MS); // only run every 100 seconds
+            vTaskDelay(10000 / portTICK_PERIOD_MS); // only run every 10 seconds
             continue;
         }
 
@@ -145,7 +134,7 @@ void pumpTask(void *pvParameters)
             ec_pump.activate(1);
         }
 
-        vTaskDelay(10000 / portTICK_PERIOD_MS); // only run every 10 seconds
+        vTaskDelay(100 / portTICK_PERIOD_MS); // only run every 10 seconds
     }
 }
 
@@ -175,11 +164,12 @@ void I2CReadTask(void *pvParameters)
     {
         i2c_slave_read_buffer(I2C_SLAVE_NUM, (uint8_t *)&THRESHOLD, I2C_SLAVE_RX_BUF_LEN, 100 / portTICK_PERIOD_MS);
         i2c_reset_rx_fifo(I2C_SLAVE_NUM);
-
+        
+        
         ESP_LOGI("PH", "THRESHOLD PH: %.2f", THRESHOLD.PH);
         ESP_LOGI("EC", "THRESHOLD EC: %.2f", THRESHOLD.EC);
         ESP_LOGI("PUMP", "THRESHOLD PUMP: %d", THRESHOLD.PUMP);
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
@@ -215,7 +205,7 @@ void I2CWriteTask(void *pvParameters)
         }
         */
         i2c_slave_write_buffer(I2C_SLAVE_NUM, (uint8_t *)&system_measurements, sizeof(system_measurements), 100 / portTICK_PERIOD_MS);
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+        vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 

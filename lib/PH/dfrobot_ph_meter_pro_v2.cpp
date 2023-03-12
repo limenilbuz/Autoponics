@@ -23,8 +23,8 @@ uint32_t DFRobotPHMeterProV2::getPH_mV()
 
 double DFRobotPHMeterProV2::voltageToPH(uint32_t voltage)
 {
-    float slope = (7.0 - 4.0) / ((1500.0 - 1500.0) / 3.0 - (2032.44 - 1500.0) / 3.0);
-    float intercept = 7.0 - slope * (1500.0 - 1500.0) / 3.0;
+    float slope = (7.0 - 4.0) / ((neutral_ph_mv - 1500.0) / 3.0 - (acidic_ph_mv - 1500.0) / 3.0);
+    float intercept = 7.0 - slope * (neutral_ph_mv - 1500.0) / 3.0;
     double value = slope * (voltage - 1500.0) / 3.0 + intercept;
     return value;
 }
