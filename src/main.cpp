@@ -3,23 +3,7 @@
  * @brief Contains app_main.
  */
 
-#include "esp_log.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "driver/gpio.h"
-#include "phmetric.hpp"
-#include "mockph.hpp"
-#include "waterlevelmetric.hpp"
-#include "mockwaterlevel.hpp"
-#include "dfrobot_noncontact_liquid_level.hpp"
-#include "dfrobot_ph_meter_pro_v2.hpp"
-#include "mockec.hpp"
-#include "ecmetric.hpp"
-#include "dfrobot_ec_meter_pro.hpp"
-#include "pins.hpp"
-#include "driver/i2c.h"
-#include "pump.hpp"
-#include "i2c_slave_config.hpp"
+#include "all_includes.hpp"
 
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
@@ -53,8 +37,8 @@ void pHTask(void *pvParameters)
     {
         auto ph_mV = ph_source.getPH_mV();
         auto ph = ph_source.voltageToPH(ph_mV);
-        ESP_LOGI("PH MEASUREMENT",
-                 "%d mV\t%.2f",
+        ESP_LOGI("PH",
+                 "pH voltage: %d mV -> %.2fpH",
                  (int)ph_mV, ph);
         system_measurements.PH = ph;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -68,7 +52,9 @@ void waterLevelTask(void *pvParameters)
     while (true)
     {
         auto measurement = wl_source.isHigh();
-        ESP_LOGI("WATER LEVEL MEASUREMENT", "WATER LEVEL MEASUREMENT %d", measurement);
+        ESP_LOGI("WL",
+                 "Water level is: %s",
+                 (measurement ? "OK" : "LOW"));
         system_measurements.WaterLevel = measurement;
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
@@ -85,8 +71,10 @@ void ecTask(void *pvParameters)
         auto temp_mv = ec_source.getTemp_mV();
         auto temp = ec_source.voltageToTemp(temp_mv);
         auto ec = ec_source.voltageToEC(ec_mv, temp);
-        auto k = RES2*ECREF*1278/100000.0/ec_mv;
-        ESP_LOGI("EC", "EC voltage: %d mV | %.2f us/cm\tTemperature voltage:  %d mV | %.2f Celsius | %.2f Kvalue",
+        auto k = RES2 * ECREF * 1278 / 100000.0 / ec_mv;
+        ESP_LOGI("EC", "EC voltage: %d mV -> %.2f μS/cm\t"
+                       "Temp voltage:  %d mV -> %.2f° Celsius\t"
+                       "%.2f Kvalue",
                  int(ec_mv), ec, int(temp_mv), temp, k);
         system_measurements.EC = ec / 1000;
         system_measurements.Temperature = temp;
@@ -164,11 +152,11 @@ void I2CReadTask(void *pvParameters)
     {
         i2c_slave_read_buffer(I2C_SLAVE_NUM, (uint8_t *)&THRESHOLD, I2C_SLAVE_RX_BUF_LEN, 100 / portTICK_PERIOD_MS);
         i2c_reset_rx_fifo(I2C_SLAVE_NUM);
-        
-        
-        ESP_LOGI("PH", "THRESHOLD PH: %.2f", THRESHOLD.PH);
-        ESP_LOGI("EC", "THRESHOLD EC: %.2f", THRESHOLD.EC);
-        ESP_LOGI("PUMP", "THRESHOLD PUMP: %d", THRESHOLD.PUMP);
+
+        ESP_LOGI("Threshold values", "THRESHOLD PH: %.2fpH\n"
+                                     "THRESHOLD EC: %.2fμS\n"
+                                     "THRESHOLD PUMP: %s",
+                 THRESHOLD.PH, THRESHOLD.EC, (THRESHOLD.PUMP ? "ON" : "OFF"));
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
@@ -178,70 +166,23 @@ void I2CWriteTask(void *pvParameters)
 {
     while (true)
     {
-        /* Random value test
-        system_measurements.PH = system_measurements.PH + ((double)(rand() % 2) / 100) - ((double)(rand() % 2) / 100);
-        if (system_measurements.PH > THRESHOLD.PH + 0.05 && THRESHOLD.PUMP){
-            system_measurements.PH = system_measurements.PH - ((double)(rand() % 15) / 100);
-        }
-        else if (system_measurements.PH < THRESHOLD.PH - 0.05 && THRESHOLD.PUMP){
-            system_measurements.PH = system_measurements.PH + ((double)(rand() % 15) / 100);
-        }
-
-        system_measurements.EC = system_measurements.EC - ((double)(rand() % 2) / 100);
-        if (system_measurements.EC < THRESHOLD.EC && THRESHOLD.PUMP){
-            system_measurements.EC = system_measurements.EC + ((double)(rand() % 20) / 100);
-        }
-        if (system_measurements.EC < 0){
-            system_measurements.EC = 0;
-        }
-
-        system_measurements.Temperature = 60 + ((double)(rand() % 500) / 100);
-
-        double wl_threshold = rand() % 100;
-        system_measurements.WaterLevel = false;
-        if (wl_threshold > 10){
-            system_measurements.WaterLevel = true;
-
-        }
-        */
         i2c_slave_write_buffer(I2C_SLAVE_NUM, (uint8_t *)&system_measurements, sizeof(system_measurements), 100 / portTICK_PERIOD_MS);
         vTaskDelay(1000 / portTICK_PERIOD_MS);
     }
 }
 
-void relayTest(void *pvParameters)
-{
-    gpio_reset_pin(PH_UP_PUMP_RELAY_PIN);
-    gpio_set_direction(PH_UP_PUMP_RELAY_PIN, GPIO_MODE_OUTPUT);
-    Pump ph_up_pump{3220, PH_UP_PUMP_RELAY_PIN};
-    bool once = false;
-    while (1)
-    {
-        if (!once) {
-            ph_up_pump.activate(10);
-            once = true;
-        }
-
-        vTaskDelay(10000 / portTICK_PERIOD_MS);
-    }
-}
-
-/**
- * @brief The main function. Currenlty blinker example.
- */
 extern "C" void app_main(void)
 {
-
     ESP_ERROR_CHECK(i2c_slave_init());
     ESP_LOGI("I2C Connection", "I2C initialized successfully");
 
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
     adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
 
-    xTaskCreate(ecTask, "ec task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(waterLevelTask, "water level task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask, "ph task", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(I2CReadTask, "I2C Read", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(I2CWriteTask, "I2C Write", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pumpTask, "Pump array task", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
+    xTaskCreate(ecTask, "ecTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(waterLevelTask, "waterLevelTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(pHTask, "pHTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CReadTask, "I2CReadTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(I2CWriteTask, "I2CWriteTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    xTaskCreate(pumpTask, "pumpTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
 }
