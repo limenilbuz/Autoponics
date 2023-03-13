@@ -8,6 +8,8 @@
 #define TASK_STACK_SIZE 4096
 #define TASK_PRIORITY 1
 
+#define GPIO_OUTPUT_PIN 2
+
 static esp_adc_cal_characteristics_t adc1_chars;
 
 struct Threshold
@@ -82,6 +84,47 @@ void ecTask(void *pvParameters)
     }
 }
 
+void sensorTask(void *pvParameters){
+    static DFRobotPHMeterProV2 ph_source{adc1_chars};
+    static DFRobotECMeterPro ec_source{adc1_chars};
+    static PHMetric ph(ph_source);
+
+    while (true)
+    {
+        gpio_set_level(GPIO_NUM_2, 1);
+
+        auto ph_mV = ph_source.getPH_mV();
+        auto ph = ph_source.voltageToPH(ph_mV);
+        ESP_LOGI("PH",
+                 "pH voltage: %d mV -> %.2fpH",
+                 (int)ph_mV, ph);
+        system_measurements.PH = ph;
+
+        gpio_set_level(GPIO_NUM_2, 0);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+        gpio_set_level(GPIO_NUM_4, 1);
+        gpio_set_level(GPIO_NUM_16, 1);
+
+        auto ec_mv = ec_source.getEC_mV();
+        auto temp_mv = ec_source.getTemp_mV();
+        auto temp = ec_source.voltageToTemp(temp_mv);
+        auto ec = ec_source.voltageToEC(ec_mv, temp);
+        auto k = RES2 * ECREF * 1278 / 100000.0 / ec_mv;
+        ESP_LOGI("EC", "EC voltage: %d mV -> %.2f μS/cm\t"
+                       "Temp voltage:  %d mV -> %.2f° Celsius\t"
+                       "%.2f Kvalue",
+                 int(ec_mv), ec, int(temp_mv), temp, k);
+        system_measurements.EC = ec / 1000;
+        system_measurements.Temperature = temp;
+        
+        gpio_set_level(GPIO_NUM_4, 0);
+        gpio_set_level(GPIO_NUM_16, 0);
+        vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+    }
+}
+
 void pumpTask(void *pvParameters)
 {
 
@@ -100,7 +143,7 @@ void pumpTask(void *pvParameters)
 
     while (true)
     {
-        double delta = 0.5;
+        double delta = 0.15;
 
         if (!THRESHOLD.PUMP)
         {
@@ -111,18 +154,21 @@ void pumpTask(void *pvParameters)
         if (system_measurements.PH > THRESHOLD.PH + delta)
         {
             ph_down_pump.activate(1);
+            vTaskDelay(10000 / portTICK_PERIOD_MS);
         }
         else if (system_measurements.PH < THRESHOLD.PH - delta)
         {
             ph_up_pump.activate(1);
+            vTaskDelay(10000 / portTICK_PERIOD_MS);
         }
 
         if (system_measurements.EC < THRESHOLD.EC - delta)
         {
             ec_pump.activate(1);
+            vTaskDelay(10000 / portTICK_PERIOD_MS);
         }
 
-        vTaskDelay(100 / portTICK_PERIOD_MS); // only run every 10 seconds
+        vTaskDelay(500 / portTICK_PERIOD_MS); // only run every 10 seconds
     }
 }
 
@@ -160,10 +206,21 @@ extern "C" void app_main(void)
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, (adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
     adc1_config_width((adc_bits_width_t)ADC_WIDTH_BIT_DEFAULT);
 
-    xTaskCreate(ecTask,         "ecTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    // Set pinout
+    gpio_pad_select_gpio(2);
+    gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT);
+
+    gpio_pad_select_gpio(4);
+    gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
+
+    gpio_pad_select_gpio(16);
+    gpio_set_direction(GPIO_NUM_16, GPIO_MODE_OUTPUT);
+
+    //xTaskCreate(ecTask,         "ecTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(waterLevelTask, "waterLevelTask", TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pHTask,         "pHTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
+    //xTaskCreate(pHTask,         "pHTask",         TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(I2CReadTask,    "I2CReadTask",    TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
     xTaskCreate(I2CWriteTask,   "I2CWriteTask",   TASK_STACK_SIZE, NULL, TASK_PRIORITY, NULL);
-    xTaskCreate(pumpTask,       "pumpTask",       TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
+    //xTaskCreate(pumpTask,       "pumpTask",       TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
+    xTaskCreate(sensorTask,      "pHPowerTask",    TASK_STACK_SIZE, NULL, TASK_PRIORITY - 1, NULL);
 }
