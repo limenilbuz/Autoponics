@@ -28,7 +28,7 @@ CAD Render
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/CAD_model_render.PNG)
 
 The Finite State Machine for the code is shown below.
-![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
+![](https://github.com/limenilbuz/Autoponics/blob/main/images/FSM_Autoponics.png)
 
 ## Dependencies
 
@@ -49,7 +49,7 @@ The GUI code is separately uploaded to a WT32-SC01, and is connected to the main
 A schematic for wiring is as follows (needs improvement for clarity)
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/wiring.png)
 
-A simplified schematic
+(A simplified schematic)
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
 
 ## Future
