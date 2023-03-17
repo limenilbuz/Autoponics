@@ -46,17 +46,20 @@ uint32_t DFRobotECMeterPro::getEC_mV() {
 }
 
 double DFRobotECMeterPro::voltageToEC(double voltage) {
+    // adapted from: https://github.com/cdjq/DFRobot_ECPRO/blob/master/DFRobot_ECPRO.cpp
     double value = 100000 * voltage / RES2 / ECREF * calibration_value;
     return value;                
 }
 
 double DFRobotECMeterPro::voltageToEC(double voltage, double temperature) {
+    // adapted from: https://github.com/cdjq/DFRobot_ECPRO/blob/master/DFRobot_ECPRO.cpp
     double ecvalueRaw = 100000 * voltage / RES2 / ECREF * calibration_value;
     double value = ecvalueRaw / (1.0 + 0.02 * (temperature - 25.0));
     return value;
 }
 
 double DFRobotECMeterPro::voltageToTemp(uint32_t voltage) {
+    // adapted from: https://github.com/cdjq/DFRobot_ECPRO/blob/master/DFRobot_ECPRO.cpp
     double normalized_voltage = (double) voltage / 1000; 
     double Rpt1000 = (normalized_voltage/GDIFF+VR0)/I/G0;
     double temp = (Rpt1000-1000)/3.85;
