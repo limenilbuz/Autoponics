@@ -46,11 +46,20 @@ https://github.com/wjswogur56/Autoponics-GUI
 The code can be used an ran by uploading it to a ESP32 through PlatformIO. Note that framework-espidf version 4.4.2 was used in testing.
 The GUI code is separately uploaded to a WT32-SC01, and is connected to the main ESP32 through I2C using pin 18 (SDA) and 19 (SCL)
 
-A schematic for wiring is as follows (needs improvement for clarity)
-![](https://github.com/limenilbuz/Autoponics/blob/main/images/wiring.png)
-
-(A simplified schematic)
+A schematic for wiring data is shown below
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
+
+Pins used
+1. Motor
+  1.  pH UP         -> GPIO 32
+  2.  pH Down       -> GPIO 33
+  3.  EC            -> GPIO 25
+
+2. Sensor
+  1.  Water Level   -> GPIO 23
+  2.  pH            -> ADC1 0
+  3.  EC            -> ADC1 3
+  4.  Temperature   -> ADC1 6
 
 ## Future
 
