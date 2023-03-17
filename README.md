@@ -27,6 +27,9 @@ CAD
 CAD Render
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/CAD_model_render.PNG)
 
+The Finite State Machine for the code is shown below.
+![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
+
 ## Dependencies
 
 FreeRTOS was used for the main code to create multithreading tasks. 
@@ -43,8 +46,11 @@ https://github.com/wjswogur56/Autoponics-GUI
 The code can be used an ran by uploading it to a ESP32 through PlatformIO. Note that framework-espidf version 4.4.2 was used in testing.
 The GUI code is separately uploaded to a WT32-SC01, and is connected to the main ESP32 through I2C using pin 18 (SDA) and 19 (SCL)
 
-A simple schematic for wiring is as follows (needs improvement for clarity)
+A schematic for wiring is as follows (needs improvement for clarity)
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/wiring.png)
+
+A simplified schematic
+![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
 
 ## Future
 
