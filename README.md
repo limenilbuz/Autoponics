@@ -50,12 +50,12 @@ A schematic for wiring data is shown below
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/simple_schematic.png)
 
 Pins used
-1. Motor
+Motor
   1.  pH UP         -> GPIO 32
   2.  pH Down       -> GPIO 33
   3.  EC            -> GPIO 25
 
-2. Sensor
+Sensor
   1.  Water Level   -> GPIO 23
   2.  pH            -> ADC1 0
   3.  EC            -> ADC1 3
