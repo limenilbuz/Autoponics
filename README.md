@@ -25,7 +25,7 @@ CAD
 ![](https://github.com/limenilbuz/Autoponics/blob/main/images/CAD_model.png)
 
 CAD Render
-![](https://github.com/limenilbuz/Autoponics/blob/main/images/CAD_model_render.png)
+![](https://github.com/limenilbuz/Autoponics/blob/main/images/CAD_model_render.PNG)
 
 ## Dependencies
 
