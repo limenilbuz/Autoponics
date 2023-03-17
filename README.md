@@ -1,5 +1,6 @@
-##AUTOPONICS
+## AUTOPONICS
 Automated Hydroponics
+
 ![](https://github.com/limenilbuz/Autoponics/blob/main/IMG_1142.gif)
 
 ## Overview
